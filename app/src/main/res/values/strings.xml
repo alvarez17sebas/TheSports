@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">The Sports</string>
+    <string name="team_name">Team name</string>
+    <string name="stadium_name">Stadium name</string>
 </resources>
