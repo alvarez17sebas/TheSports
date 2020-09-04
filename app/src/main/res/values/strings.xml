@@ -1,9 +1,14 @@
 <resources>
-    <string name="app_name">The Sports</string>
+    <string name="app_name">The Sports Db</string>
+    <string name="welcome">Welcome!!</string>
     <string name="team_name">Team name</string>
     <string name="stadium_name">Stadium name</string>
     <string name="team_foundation">Team foundation year</string>
     <string name="description">Description</string>
     <string name="images">Images</string>
     <string name="events">Events</string>
+    <string name="spanish_league">Spanish la liga</string>
+    <string name="german_league">German Bundesliga</string>
+    <string name="nba_league">NBA</string>
+    <string name="no_url">The team has not URL assigned</string>
 </resources>

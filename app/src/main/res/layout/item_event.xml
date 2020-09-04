@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/multiplier_3X_dp"
+    android:layout_marginLeft="@dimen/multiplier_2X_dp"
     android:elevation="@dimen/multiplier_5X_dp"
+    app:cardBackgroundColor="@android:color/holo_blue_light"
     app:cardCornerRadius="@dimen/multiplier_5X_dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,10 +17,10 @@
 
         <TextView
             android:id="@+id/tvEventNameItem"
+            style="@style/smallText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            style="@style/smallText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,4 +1,4 @@
-package com.companytest.thesports.repository
+package com.companytest.thesports.repository.real
 
 import com.companytest.thesports.model.BaseEvent
 import com.companytest.thesports.model.BaseTeam
@@ -10,8 +10,8 @@ import retrofit2.http.Query
 
 interface SportService {
 
-    @GET("search_all_teams.php?l=Spanish la liga")
-    suspend fun retrieveAllTeams(): BaseTeam
+    @GET("search_all_teams.php")
+    suspend fun retrieveAllTeams(@Query("l") leagueParameter: String): BaseTeam
 
     @GET("lookupteam.php")
     suspend fun retrieveTeam(@Query("id") teamId: String): BaseTeam

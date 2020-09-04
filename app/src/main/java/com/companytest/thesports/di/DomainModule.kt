@@ -2,8 +2,8 @@ package com.companytest.thesports.di
 
 import com.companytest.thesports.domain.EventDomain
 import com.companytest.thesports.domain.TeamDomain
-import com.companytest.thesports.repository.EventRepository
-import com.companytest.thesports.repository.TeamRepository
+import com.companytest.thesports.repository.real.EventRepository
+import com.companytest.thesports.repository.real.TeamRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

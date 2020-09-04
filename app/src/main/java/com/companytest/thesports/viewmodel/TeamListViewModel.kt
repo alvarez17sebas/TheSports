@@ -1,6 +1,5 @@
 package com.companytest.thesports.viewmodel
 
-import android.content.ClipData
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,11 +18,11 @@ class TeamListViewModel @ViewModelInject constructor(private val teamDomain: Tea
     private val _loading: MutableLiveData<Boolean> = MutableLiveData()
     val loading: LiveData<Boolean> = _loading
 
-    fun retrieveAllTeams(){
+    fun retrieveAllTeams(leagueParameter: String){
         viewModelScope.launch {
             var response: List<Team>? = null
             _loading.value = true
-            response = teamDomain.retrieveAllTeams()
+            response = teamDomain.retrieveAllTeams(leagueParameter)
             _loading.value = false
             _teamsLiveData.value = response
         }

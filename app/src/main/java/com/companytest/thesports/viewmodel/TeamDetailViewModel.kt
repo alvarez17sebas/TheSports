@@ -22,7 +22,6 @@ class TeamDetailViewModel @ViewModelInject constructor(private val teamDomain: T
     private val _loading: MutableLiveData<Boolean> = MutableLiveData()
     val loading: LiveData<Boolean> = _loading
 
-
     fun retrieveTeam(idTeam: String){
         viewModelScope.launch {
             var response: Team? = null
@@ -35,10 +34,10 @@ class TeamDetailViewModel @ViewModelInject constructor(private val teamDomain: T
 
     fun retrieveNextEventsByTeamId(teamId: String){
         viewModelScope.launch {
-            var response: List<Event>? = null
+            var response: List<Event> = arrayListOf()
             _loading.value = true
             response = eventDomain.retrieveAllEventsByTeamId(teamId)
-            _eventsLiveData.value = response
+            _eventsLiveData.value = response ?: arrayListOf()
         }
     }
 }

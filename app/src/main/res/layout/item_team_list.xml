@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="@dimen/multiplier_5X_dp"
-    app:cardCornerRadius="@dimen/multiplier_5X_dp"
     android:layout_margin="@dimen/multiplier_4X_dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:elevation="@dimen/multiplier_5X_dp"
+    app:cardCornerRadius="@dimen/multiplier_5X_dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/multiplier_12X_dp">
-
 
         <ImageView
             android:id="@+id/ivTeamItem"
@@ -24,44 +24,42 @@
 
         <TextView
             android:id="@+id/textView"
+            style="@style/guideText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/multiplier_5X_dp"
             android:text="@string/team_name"
-            style="@style/guideText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivTeamItem" />
 
         <TextView
             android:id="@+id/tvTeamNameItem"
+            style="@style/normalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/multiplier_2X_dp"
-            android:text="TextView"
-            style="@style/normalText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
             android:id="@+id/textView3"
+            style="@style/guideText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/multiplier_10X_dp"
             android:text="@string/stadium_name"
-            style="@style/guideText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTeamNameItem" />
 
         <TextView
             android:id="@+id/tvStadiumNameItem"
+            style="@style/normalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/multiplier_2X_dp"
-            android:text="TextView"
-            style="@style/normalText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />

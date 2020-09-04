@@ -3,11 +3,13 @@ package com.companytest.thesports.view.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.companytest.thesports.R
 import com.companytest.thesports.databinding.ActivityTeamListBinding
 import com.companytest.thesports.model.Team
 import com.companytest.thesports.view.TEAM_ID
@@ -27,8 +29,8 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
         setupDataBinding()
         setupRecyclerView()
 
-        teamListViewModel.retrieveAllTeams()
-
+        teamListViewModel.retrieveAllTeams(getString(R.string.spanish_league))
+        radioButtonsClick()
         executeObserves()
     }
 
@@ -50,16 +52,32 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
 
     private fun executeObserves(){
         teamListViewModel.loading.observe(this, Observer { isLoading: Boolean ->
-            if(isLoading){
-                Toast.makeText(this, "Cargando información de equipos....", Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(this, "Carga completa", Toast.LENGTH_SHORT).show()
-            }
+            if(isLoading) binding.clLoadingContainer.visibility = View.VISIBLE else binding.clLoadingContainer.visibility = View.GONE
+
         })
 
         teamListViewModel.itemsLiveData.observe(this, Observer {teams: List<Team> ->
             setRecycleData(teams)
         })
+    }
+
+    private fun radioButtonsClick(){
+        var leagueParameter: String = getString(R.string.spanish_league)
+        binding.rbSpanishLeague.setOnClickListener {
+            leagueParameter = binding.rbSpanishLeague.text.toString()
+            teamListViewModel.retrieveAllTeams(leagueParameter)
+        }
+
+        binding.rbGermanLeague.setOnClickListener {
+            leagueParameter = binding.rbGermanLeague.text.toString()
+            teamListViewModel.retrieveAllTeams(leagueParameter)
+        }
+
+        binding.rbNbaLeague.setOnClickListener {
+            leagueParameter = binding.rbNbaLeague.text.toString()
+            teamListViewModel.retrieveAllTeams(leagueParameter)
+        }
+
     }
 
     override fun teamClick(team: Team) {

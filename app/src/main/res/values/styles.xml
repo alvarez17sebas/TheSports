@@ -19,6 +19,7 @@
 
     <style name="smallText" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/multiplier_6X_sp</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="titleText" parent="TextAppearance.AppCompat">

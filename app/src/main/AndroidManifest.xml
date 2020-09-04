@@ -7,15 +7,19 @@
     <application
         android:name=".TheSportApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_sportdatabase"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_sportdatabase"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.activity.TeamDetailActivity"
-            android:parentActivityName=".view.activity.TeamListActivity"/>
-        <activity android:name=".view.activity.TeamListActivity" />
-        <activity android:name=".view.activity.SplashScreenActivity">
+            android:parentActivityName=".view.activity.TeamListActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".view.activity.TeamListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.activity.SplashScreenActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

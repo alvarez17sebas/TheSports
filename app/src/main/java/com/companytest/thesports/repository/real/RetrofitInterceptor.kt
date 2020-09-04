@@ -1,4 +1,4 @@
-package com.companytest.thesports.repository
+package com.companytest.thesports.repository.real
 
 import android.util.Log
 import okhttp3.Interceptor
@@ -21,8 +21,10 @@ class RetrofitInterceptor : Interceptor {
             contentLength = responseBody.contentLength()
         }
         val bodySize = if (contentLength != -1L) "$contentLength-byte" else "unknown-length"
-        val message = "<-- " + response.code() + (if (response.message().isEmpty()) "" else ' ' + response.message())+ ' '.toString() + response.request().url() + " (" + 0 + "ms" + ", $bodySize body" + ')'.toString()
-        //FirebaseCrashlytics.getInstance().log(message)
+        val message = "<-- " + response.code() + (if (response.message()
+                .isEmpty()
+        ) "" else ' ' + response.message()) + ' '.toString() + response.request()
+            .url() + " (" + 0 + "ms" + ", $bodySize body" + ')'.toString()
         Log.d("interceptor", message)
 
         return response
