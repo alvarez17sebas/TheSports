@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.companytest.thesports.databinding.ActivityTeamListBinding
 import com.companytest.thesports.model.Team
+import com.companytest.thesports.view.TEAM_ID
 import com.companytest.thesports.view.adapter.TeamAdapter
 import com.companytest.thesports.view.adapter.TeamClickListener
 import com.companytest.thesports.viewmodel.TeamListViewModel
@@ -63,6 +64,7 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
 
     override fun teamClick(team: Team) {
         val intent: Intent = Intent(this, TeamDetailActivity::class.java)
+        intent.putExtra(TEAM_ID, team.idTeam.toString())
         startActivity(intent)
     }
 }

@@ -1,20 +1,19 @@
 package com.companytest.thesports.model
 
 data class Team (
-
-    val idTeam : Int,
-    val idSoccerXML : Int,
-    val idAPIfootball : Int,
+    val idTeam : String,
+    val idSoccerXML : String,
+    val idAPIfootball : String,
     val intLoved : String,
     val strTeam : String,
     val strTeamShort : String,
     val strAlternate : String,
-    val intFormedYear : Int,
+    val intFormedYear : String,
     val strSport : String,
     val strLeague : String,
-    val idLeague : Int,
+    val idLeague : String,
     val strLeague2 : String,
-    val idLeague2 : Int,
+    val idLeague2 : String,
     val strLeague3 : String,
     val idLeague3 : String,
     val strLeague4 : String,

@@ -1,5 +1,6 @@
 package com.companytest.thesports.domain
 
+import com.companytest.thesports.model.Event
 import com.companytest.thesports.model.Team
 import com.companytest.thesports.repository.RemoteRepository
 import javax.inject.Inject
@@ -11,6 +12,6 @@ class TeamDomain @Inject constructor(private val teamRepository: RemoteRepositor
     }
 
     suspend fun retrieveTeam(teamId: String): Team{
-        return teamRepository.retrieveById(teamId)
+        return teamRepository.retrieveById(teamId)[0]
     }
 }

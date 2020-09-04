@@ -18,9 +18,9 @@
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:expandedTitleTextAppearance="@style/TextAppearance.Movies.Title.Expanded"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:expandedTitleTextAppearance="@style/TextAppearance.Movies.Title.Expanded"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -47,11 +47,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 app:layout_collapseMode="pin"
-                app:title="Team name"
                 app:titleTextColor="@android:color/white" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -70,10 +68,10 @@
 
             <TextView
                 android:id="@+id/textView2"
+                style="@style/guideText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/images"
-                style="@style/guideText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,22 +85,23 @@
 
             <TextView
                 android:id="@+id/textView4"
+                style="@style/guideText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/multiplier_10X_dp"
                 android:text="@string/events"
-                style="@style/guideText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rvTeamPhotos" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvTeamEvents"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/multiplier_60X_dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/multiplier_5X_dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                tools:listitem="@layout/item_event" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -117,32 +116,32 @@
 
             <TextView
                 android:id="@+id/tvTeamFoundationYear"
+                style="@style/normalText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/multiplier_3X_dp"
                 android:text="TextView"
-                style="@style/normalText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
             <TextView
                 android:id="@+id/textView7"
+                style="@style/guideText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/multiplier_5X_dp"
                 android:text="@string/description"
-                style="@style/guideText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTeamFoundationYear" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/tvDescriptionTeamDetail"
+                style="@style/contentText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/multiplier_3X_dp"
                 android:text="TextView"
-                style="@style/normalText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 

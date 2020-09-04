@@ -17,10 +17,18 @@
         <item name="android:textSize">@dimen/multiplier_13X_sp</item>
     </style>
 
+    <style name="smallText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/multiplier_6X_sp</item>
+    </style>
+
     <style name="titleText" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/multiplier_15X_sp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="contentText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/multiplier_10X_sp</item>
     </style>
 
     <style name="TextAppearance.Movies.Title.Expanded" parent="android:TextAppearance">

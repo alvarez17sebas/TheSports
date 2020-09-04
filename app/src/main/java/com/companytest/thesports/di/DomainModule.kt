@@ -1,6 +1,8 @@
 package com.companytest.thesports.di
 
+import com.companytest.thesports.domain.EventDomain
 import com.companytest.thesports.domain.TeamDomain
+import com.companytest.thesports.repository.EventRepository
 import com.companytest.thesports.repository.TeamRepository
 import dagger.Module
 import dagger.Provides
@@ -14,5 +16,10 @@ object DomainModule {
     @Provides
     fun provideTeamDomain(repository: TeamRepository): TeamDomain {
         return TeamDomain(repository)
+    }
+
+    @Provides
+    fun provideEventDomain(repository: EventRepository): EventDomain {
+        return EventDomain(repository)
     }
 }
