@@ -109,5 +109,8 @@
     <dimen name="multiplier_100X_dp">200dp</dimen>
     <dimen name="multiplier_100X_sp">200sp</dimen>
 
+    <dimen name="multiplier_150X_dp">300dp</dimen>
+    <dimen name="multiplier_150X_sp">300sp</dimen>
+
 
 </resources>

@@ -2,4 +2,8 @@
     <string name="app_name">The Sports</string>
     <string name="team_name">Team name</string>
     <string name="stadium_name">Stadium name</string>
+    <string name="team_foundation">Team foundation year</string>
+    <string name="description">Description</string>
+    <string name="images">Images</string>
+    <string name="events">Events</string>
 </resources>

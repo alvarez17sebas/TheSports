@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -15,6 +15,18 @@
 
     <style name="normalText" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/multiplier_13X_sp</item>
+    </style>
+
+    <style name="titleText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/multiplier_15X_sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Movies.Title.Expanded" parent="android:TextAppearance">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:maxLines">2</item>
     </style>
 
 
