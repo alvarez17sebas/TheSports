@@ -1,6 +1,8 @@
 package com.companytest.thesports.data
 
-class RepositoryHandler<T>(private val repository: Repository<T>) {
+import javax.inject.Inject
+
+class RepositoryHandler<T> @Inject constructor(private val repository: Repository<T>) {
 
     suspend fun retrieveAll(leagueParameter: String): List<T>{
         return repository.retrieveAll(leagueParameter)

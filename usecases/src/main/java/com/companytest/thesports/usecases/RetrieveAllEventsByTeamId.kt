@@ -1,11 +1,11 @@
 package com.companytest.thesports.usecases
 
-import com.companytest.thesports.data.Repository
+import com.companytest.thesports.data.RepositoryHandler
 import com.companytest.thesports.domain.Event
 import javax.inject.Inject
 
-class RetrieveAllEventsByTeamId @Inject constructor(val repository: Repository<Event>){
+class RetrieveAllEventsByTeamId @Inject constructor(private val repositoryHandler: RepositoryHandler<Event>){
     suspend fun retrieveEventsByTeamId(id: String): List<Event>{
-        return repository.retrieveById(id)
+        return repositoryHandler.retrieveById(id)
     }
 }
