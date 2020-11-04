@@ -4,14 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.companytest.thesports.R
 import com.companytest.thesports.databinding.ActivityTeamListBinding
-import com.companytest.thesports.model.Team
+import com.companytest.thesports.domain.Team
 import com.companytest.thesports.view.TEAM_ID
 import com.companytest.thesports.view.adapter.TeamAdapter
 import com.companytest.thesports.view.adapter.TeamClickListener

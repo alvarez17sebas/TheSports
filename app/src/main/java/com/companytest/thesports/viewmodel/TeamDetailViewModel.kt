@@ -5,13 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.companytest.thesports.domain.Event
 import com.companytest.thesports.domain.EventDomain
-import com.companytest.thesports.domain.TeamDomain
-import com.companytest.thesports.model.Event
-import com.companytest.thesports.model.Team
+import com.companytest.thesports.domain.Team
+import com.companytest.thesports.usecases.RetrieveTeam
 import kotlinx.coroutines.launch
 
-class TeamDetailViewModel @ViewModelInject constructor(private val teamDomain: TeamDomain, private val eventDomain: EventDomain) : ViewModel() {
+class TeamDetailViewModel @ViewModelInject constructor(private val retrieveTeam: RetrieveTeam, private val eventDomain: EventDomain) : ViewModel() {
 
     private var _teamLiveData: MutableLiveData<Team> = MutableLiveData()
     var teamLiveData: LiveData<Team> = _teamLiveData
@@ -26,7 +26,7 @@ class TeamDetailViewModel @ViewModelInject constructor(private val teamDomain: T
         viewModelScope.launch {
             var response: Team? = null
             _loading.value = true
-            response = teamDomain.retrieveTeam(idTeam)
+            response = retrieveTeam.retrieveTeam(idTeam)
             _loading.value = false
             _teamLiveData.value = response
         }

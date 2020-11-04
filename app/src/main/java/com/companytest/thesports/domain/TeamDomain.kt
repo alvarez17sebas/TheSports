@@ -1,10 +1,8 @@
 package com.companytest.thesports.domain
 
-import com.companytest.thesports.model.Team
-import com.companytest.thesports.repository.RemoteRepository
-import javax.inject.Inject
+import com.companytest.thesports.data.Repository
 
-class TeamDomain @Inject constructor(private val teamRepository: RemoteRepository<Team>) {
+class TeamDomain  constructor(private val teamRepository: Repository<Team>) {
 
     suspend fun retrieveAllTeams(leagueParameter: String): List<Team> {
         return if (leagueParameter == "") return arrayListOf() else teamRepository.retrieveAll(

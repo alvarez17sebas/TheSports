@@ -1,11 +1,11 @@
 package com.companytest.thesports.repository.real
 
-import com.companytest.thesports.model.Event
-import com.companytest.thesports.repository.RemoteRepository
+import com.companytest.thesports.data.Repository
+import com.companytest.thesports.domain.Event
 import javax.inject.Inject
 
 class EventRepository @Inject constructor() :
-    RemoteRepository<Event> {
+    Repository<Event> {
 
     private var sportService: SportService =
         RetrofitClient.getSportService()
