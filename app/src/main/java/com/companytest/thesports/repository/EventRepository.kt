@@ -1,7 +1,9 @@
-package com.companytest.thesports.repository.real
+package com.companytest.thesports.repository
 
 import com.companytest.thesports.data.Repository
 import com.companytest.thesports.domain.Event
+import com.companytest.thesports.repository.network.RetrofitClient
+import com.companytest.thesports.repository.network.SportService
 import javax.inject.Inject
 
 class EventRepository @Inject constructor() :
