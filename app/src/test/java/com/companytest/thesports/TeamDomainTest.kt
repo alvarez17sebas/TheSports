@@ -1,6 +1,7 @@
 package com.companytest.thesports
 
 import com.companytest.thesports.data.Repository
+import com.companytest.thesports.data.RepositoryHandler
 import com.companytest.thesports.domain.Team
 
 import com.companytest.thesports.repository.fake.TeamFakeRepository
@@ -14,7 +15,7 @@ class TeamDomainTest {
     @Test
     fun retrieveAllTeams_getAllItems_success() {
         //Arrange
-        val fakeRepository: Repository<Team> = TeamFakeRepository()
+        val fakeRepository: RepositoryHandler<Team> = RepositoryHandler(TeamFakeRepository())
         val retrieveAllTeams: RetrieveAllTeams = RetrieveAllTeams(fakeRepository)
         val valueExpected: Int = 2
 
@@ -30,7 +31,7 @@ class TeamDomainTest {
     @Test
     fun retrieveAllTeams_withEmptyParam_failure(){
         //Arrange
-        val fakeRepository: Repository<Team> = TeamFakeRepository()
+        val fakeRepository: RepositoryHandler<Team> = RepositoryHandler(TeamFakeRepository())
         val retrieveAllTeams: RetrieveAllTeams = RetrieveAllTeams(fakeRepository)
         val valueExpected: Int = 0
 
