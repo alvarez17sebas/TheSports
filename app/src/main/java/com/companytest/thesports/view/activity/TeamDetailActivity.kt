@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.companytest.thesports.R
 import com.companytest.thesports.databinding.ActivityTeamDetailBinding
-import com.companytest.thesports.model.Event
-import com.companytest.thesports.model.Team
+import com.companytest.thesports.domain.Event
+import com.companytest.thesports.domain.Team
 import com.companytest.thesports.view.TEAM_ID
 import com.companytest.thesports.view.adapter.EventAdapter
 import com.companytest.thesports.viewmodel.TeamDetailViewModel

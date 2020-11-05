@@ -1,10 +1,10 @@
 package com.companytest.thesports.repository.fake
 
-import com.companytest.thesports.model.Team
-import com.companytest.thesports.repository.RemoteRepository
+import com.companytest.thesports.data.Repository
+import com.companytest.thesports.domain.Team
 import com.google.gson.Gson
 
-class TeamFakeRepository : RemoteRepository<Team> {
+class TeamFakeRepository : Repository<Team> {
 
     var teams: MutableList<Team> = arrayListOf()
 

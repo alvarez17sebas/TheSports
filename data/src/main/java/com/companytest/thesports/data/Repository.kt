@@ -1,6 +1,6 @@
-package com.companytest.thesports.repository
+package com.companytest.thesports.data
 
-interface RemoteRepository<T> {
+interface Repository <T> {
     suspend fun retrieveAll(leagueParameter: String): List<T>
     suspend fun retrieveById(id: String): List<T>
 }

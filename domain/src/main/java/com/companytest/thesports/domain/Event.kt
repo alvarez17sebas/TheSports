@@ -1,4 +1,4 @@
-package com.companytest.thesports.model
+package com.companytest.thesports.domain
 
 data class Event(
     val idEvent: Int,

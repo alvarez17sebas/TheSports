@@ -1,11 +1,9 @@
 package com.companytest.thesports.repository.real
 
-import com.companytest.thesports.model.BaseEvent
-import com.companytest.thesports.model.BaseTeam
-import com.companytest.thesports.model.Event
-import com.companytest.thesports.model.Team
+
+import com.companytest.thesports.domain.BaseEvent
+import com.companytest.thesports.domain.BaseTeam
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface SportService {

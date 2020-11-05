@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.companytest.thesports.R
 import com.companytest.thesports.databinding.ItemTeamListBinding
-import com.companytest.thesports.model.Team
+import com.companytest.thesports.domain.Team
 
 class TeamAdapter(private val data: List<Team>, private val teamClickListener: TeamClickListener) :
     RecyclerView.Adapter<TeamAdapter.TeamViewHolder>() {

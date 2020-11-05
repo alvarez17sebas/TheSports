@@ -1,3 +1,3 @@
-package com.companytest.thesports.model
+package com.companytest.thesports.domain
 
 data class BaseEvent(val events: List<Event>)

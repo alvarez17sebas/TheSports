@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.companytest.thesports.databinding.ItemEventBinding
-import com.companytest.thesports.model.Event
+import com.companytest.thesports.domain.Event
 
 class EventAdapter(var data: List<Event>) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
