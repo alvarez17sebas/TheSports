@@ -1,4 +1,4 @@
-package com.companytest.thesports.repository.real
+package com.companytest.thesports.repository.network
 
 import android.util.Log
 import okhttp3.Interceptor

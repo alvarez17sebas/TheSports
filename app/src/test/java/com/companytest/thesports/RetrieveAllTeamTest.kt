@@ -18,57 +18,63 @@ class RetrieveAllTeamTest {
 
     @RelaxedMockK
     lateinit var repository: Repository<Team>
-
+    lateinit var repositoryHandler: RepositoryHandler<Team>
 
     @Before
-    fun setup(){
+    fun setup() {
         MockKAnnotations.init(this)
+        repositoryHandler = RepositoryHandler(repository)
     }
 
     @Test
     fun retrieveAllTeams_getAllItems_success() {
 
         //Arrange
-        var retrieveAllTeam: RetrieveAllTeams = RetrieveAllTeams(RepositoryHandler(repository))
-        var teams: List<Team> = ArrayList()
+        val retrieveAllTeam: RetrieveAllTeams = RetrieveAllTeams(RepositoryHandler(repository))
+        val parameter: String = ""
+        var fakeResponse: List<Team> = listOf(Team(), Team())
         val valueExpected = 2
+        var response: List<Team>? = null
+
 
         //Act
         coEvery {
-             retrieveAllTeam.retrieveTeams("spanish")
-        } returns listOf(Team(), Team())
+            repositoryHandler.retrieveAll(parameter)
+        } returns fakeResponse
 
         runBlocking {
-            teams = retrieveAllTeam.retrieveTeams("spanish")
+            response = retrieveAllTeam.retrieveTeams(parameter)
         }
 
         //Assert
-        Assert.assertEquals(valueExpected, teams.size)
+        Assert.assertEquals(valueExpected, response?.size)
 
     }
 
     @Test
-    fun `retrieveAllItems and to get empty list`(){
+    fun `retrieveAllItems and to get empty list`() {
         //Arrange
-        var retrieveAllTeam: RetrieveAllTeams = RetrieveAllTeams(RepositoryHandler(repository))
-        var teams: List<Team> = ArrayList()
+        val retrieveAllTeam: RetrieveAllTeams = RetrieveAllTeams(RepositoryHandler(repository))
+        val parameter: String = ""
+        var fakeResponse: List<Team> = ArrayList()
         val valueExpected = 0
+        var response: List<Team>? = null
 
         //Act
         coEvery {
-            retrieveAllTeam.retrieveTeams("spanish")
-        } returns listOf()
+            repositoryHandler.retrieveAll(parameter)
+        } returns fakeResponse
 
         runBlocking {
-            teams = retrieveAllTeam.retrieveTeams("spanish")
+            response = retrieveAllTeam.retrieveTeams(parameter)
         }
 
         //Assert
-        Assert.assertEquals(valueExpected, teams.size)
+        Assert.assertEquals(valueExpected, response?.size)
     }
 
     @After
-    fun tearDown(){
+    fun tearDown() {
         unmockkAll()
     }
 }

@@ -1,4 +1,4 @@
-package com.companytest.thesports.repository.real
+package com.companytest.thesports.repository.network
 
 import com.companytest.thesports.repository.BASE_URL
 import okhttp3.OkHttpClient
