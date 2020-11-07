@@ -38,12 +38,13 @@ class TeamDetailActivity : AppCompatActivity() {
 
         receiveTeamId()
 
-        teamDetailViewModel.retrieveTeam(teamId)
-        teamDetailViewModel.retrieveNextEventsByTeamId(teamId)
+        //teamDetailViewModel.retrieveTeam(teamId)
+        //teamDetailViewModel.retrieveNextEventsByTeamId(teamId)
+        executeObservers()
 
         setupEventRecyclerView()
 
-        executeObservers()
+
     }
 
     private fun receiveTeamId() {
@@ -75,7 +76,7 @@ class TeamDetailActivity : AppCompatActivity() {
     }
 
     private fun executeObservers() {
-        teamDetailViewModel.teamLiveData.observe(this, Observer { team: Team ->
+        teamDetailViewModel.retrieveTeam(teamId).observe(this, Observer { team: Team ->
             supportActionBar?.title = (team.strTeam)
             binding.tvTeamFoundationYear.text = team.intFormedYear
             binding.tvDescriptionTeamDetail.text = team.strDescriptionEN
@@ -85,7 +86,7 @@ class TeamDetailActivity : AppCompatActivity() {
             clickEvents(team)
         })
 
-        teamDetailViewModel.eventsLiveData.observe(this, Observer { events: List<Event> ->
+        teamDetailViewModel.retrieveNextEventsByTeamId(teamId).observe(this, Observer { events: List<Event> ->
             setRecyclerEventData(events)
         })
 

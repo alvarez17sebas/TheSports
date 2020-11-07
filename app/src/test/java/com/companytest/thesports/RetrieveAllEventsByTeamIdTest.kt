@@ -8,6 +8,9 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.unmockkAll
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert
@@ -31,7 +34,7 @@ class RetrieveAllEventsByTeamIdTest {
         //Arrange
         val retrieveEvents: RetrieveAllEventsByTeamId = RetrieveAllEventsByTeamId(repositoryHandler)
         val parameter: String = ""
-        val fakeResponse: List<Event> = listOf(Event(), Event(), Event())
+        val fakeResponse: Flow<List<Event>> = flowOf(listOf(Event(), Event(), Event()))
         val responseExpected: List<Event> = listOf(Event(), Event(), Event())
         var response: List<Event>? = null
 
@@ -41,7 +44,7 @@ class RetrieveAllEventsByTeamIdTest {
         } returns fakeResponse
 
         runBlocking {
-            response = retrieveEvents.retrieveEventsByTeamId(parameter)
+            response = retrieveEvents.retrieveEventsByTeamId(parameter).single()
         }
 
         //Assert

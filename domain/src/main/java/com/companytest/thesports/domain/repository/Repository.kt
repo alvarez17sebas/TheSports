@@ -1,6 +1,8 @@
 package com.companytest.thesports.domain.repository
 
+import kotlinx.coroutines.flow.Flow
+
 interface Repository <T> {
-    suspend fun retrieveAll(leagueParameter: String): List<T>
-    suspend fun retrieveById(id: String): List<T>
+    fun retrieveAll(leagueParameter: String): Flow<List<T>>
+    fun retrieveById(id: String): Flow<List<T>>
 }

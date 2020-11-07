@@ -8,6 +8,9 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.unmockkAll
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert
@@ -32,10 +35,9 @@ class RetrieveAllTeamTest {
         //Arrange
         val retrieveAllTeam: RetrieveAllTeams = RetrieveAllTeams(RepositoryHandler(repository))
         val parameter: String = ""
-        var fakeResponse: List<Team> = listOf(Team(), Team())
+        var fakeResponse: Flow<List<Team>> = flowOf(listOf(Team(), Team()))
         val valueExpected = 2
         var response: List<Team>? = null
-
 
         //Act
         coEvery {
@@ -43,7 +45,7 @@ class RetrieveAllTeamTest {
         } returns fakeResponse
 
         runBlocking {
-            response = retrieveAllTeam.retrieveTeams(parameter)
+            response = retrieveAllTeam.retrieveTeams(parameter).single()
         }
 
         //Assert
@@ -56,7 +58,7 @@ class RetrieveAllTeamTest {
         //Arrange
         val retrieveAllTeam: RetrieveAllTeams = RetrieveAllTeams(RepositoryHandler(repository))
         val parameter: String = ""
-        var fakeResponse: List<Team> = ArrayList()
+        var fakeResponse: Flow<List<Team>> = flowOf(ArrayList())
         val valueExpected = 0
         var response: List<Team>? = null
 
@@ -66,7 +68,7 @@ class RetrieveAllTeamTest {
         } returns fakeResponse
 
         runBlocking {
-            response = retrieveAllTeam.retrieveTeams(parameter)
+            response = retrieveAllTeam.retrieveTeams(parameter).single()
         }
 
         //Assert

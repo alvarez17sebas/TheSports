@@ -29,6 +29,10 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
         setupRecyclerView()
 
         teamListViewModel.retrieveAllTeams(getString(R.string.spanish_league))
+            .observe(this, Observer {teams: List<Team> ->
+            setRecycleData(teams)
+        })
+
         radioButtonsClick()
         executeObserves()
     }
@@ -53,10 +57,6 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
         teamListViewModel.loading.observe(this, Observer { isLoading: Boolean ->
             if(isLoading) binding.clLoadingContainer.visibility = View.VISIBLE else binding.clLoadingContainer.visibility = View.GONE
 
-        })
-
-        teamListViewModel.itemsLiveData.observe(this, Observer {teams: List<Team> ->
-            setRecycleData(teams)
         })
     }
 
