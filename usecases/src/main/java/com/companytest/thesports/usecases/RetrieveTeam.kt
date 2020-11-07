@@ -1,6 +1,6 @@
 package com.companytest.thesports.usecases
 
-import com.companytest.thesports.data.Repository
+import com.companytest.thesports.domain.repository.Repository
 import com.companytest.thesports.domain.Team
 import javax.inject.Inject
 

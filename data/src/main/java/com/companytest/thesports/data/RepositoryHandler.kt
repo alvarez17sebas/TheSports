@@ -1,5 +1,6 @@
 package com.companytest.thesports.data
 
+import com.companytest.thesports.domain.repository.Repository
 import javax.inject.Inject
 
 class RepositoryHandler<T> @Inject constructor(private val repository: Repository<T>) {
