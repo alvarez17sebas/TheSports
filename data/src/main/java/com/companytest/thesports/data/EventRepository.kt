@@ -25,4 +25,8 @@ class EventRepository @Inject constructor(var sportService: TheSportService) :
 
         return flow
     }
+
+    override fun save(data: Event) {
+
+    }
 }

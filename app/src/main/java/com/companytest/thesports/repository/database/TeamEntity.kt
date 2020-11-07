@@ -1,0 +1,19 @@
+package com.companytest.thesports.repository.database
+
+import androidx.room.Entity
+
+@Entity(tableName = "team")
+data class TeamEntity(
+    val id_team: String = "",
+    val str_team: String = "",
+    val int_formedYear: String = "",
+    val strS_stadium: String = "",
+    val str_website: String = "",
+    val str_facebook: String = "",
+    val str_twitter: String = "",
+    val str_instagram: String = "",
+    val str_descriptionEN: String = "",
+    val str_teamBadge: String = "",
+    val st_teamJersey: String = "",
+    val str_youtube: String = ""
+)
