@@ -1,16 +1,12 @@
-package com.companytest.thesports.repository
+package com.companytest.thesports.data
 
-import com.companytest.thesports.data.Repository
+import com.companytest.thesports.data.network.TheSportService
 import com.companytest.thesports.domain.Team
-import com.companytest.thesports.repository.network.RetrofitClient
-import com.companytest.thesports.repository.network.SportService
+import com.companytest.thesports.domain.repository.Repository
 import javax.inject.Inject
 
-class TeamRepository @Inject constructor() :
+class TeamRepository @Inject constructor(var sportService: TheSportService) :
     Repository<Team> {
-
-    private var sportService: SportService =
-        RetrofitClient.getSportService()
 
     override suspend fun retrieveAll(leagueParameter: String): List<Team> {
         return sportService.retrieveAllTeams(leagueParameter).teams
