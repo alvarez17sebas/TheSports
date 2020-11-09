@@ -4,7 +4,10 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.companytest.thesports.data.database.OperationLocalDatabase
+import com.companytest.thesports.domain.Team
 import com.companytest.thesports.repository.database.AppDatabase
+import com.companytest.thesports.repository.database.OperationTeamLocalDatabaseImpl
 import com.companytest.thesports.repository.database.TeamDao
 import dagger.Module
 import dagger.Provides
@@ -16,7 +19,6 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 @Module
 object DatabaseModule {
-    @Singleton
     @Provides
     fun provideDatabaseInstance(@ApplicationContext context: Context): AppDatabase {
         synchronized(this){
@@ -39,5 +41,10 @@ object DatabaseModule {
     @Provides
     fun provideTeamDao(database: AppDatabase): TeamDao {
          return database.teamDao()
+    }
+
+    @Provides
+    fun provideTeamLocalRepository(teamDao: TeamDao): OperationLocalDatabase<Team> {
+        return OperationTeamLocalDatabaseImpl(teamDao)
     }
 }

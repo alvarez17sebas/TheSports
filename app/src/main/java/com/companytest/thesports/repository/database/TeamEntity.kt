@@ -1,9 +1,11 @@
 package com.companytest.thesports.repository.database
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "team")
 data class TeamEntity(
+    @PrimaryKey
     val id_team: String = "",
     val str_team: String = "",
     val int_formedYear: String = "",
