@@ -1,7 +1,8 @@
-package com.companytest.thesports.repository.database
+package com.companytest.thesports.repository.database.dao
 
 import androidx.room.*
 import com.companytest.thesports.repository.database.entity.TeamEntity
+import com.companytest.thesports.repository.database.entity.TeamWithEvents
 
 @Dao
 interface TeamDao {
@@ -22,4 +23,8 @@ interface TeamDao {
 
     @Delete
     suspend fun delete(data: TeamEntity)
+
+    @Transaction
+    @Query("SELECT * FROM team")
+    fun getTeamWithEvents(): List<TeamWithEvents>
 }

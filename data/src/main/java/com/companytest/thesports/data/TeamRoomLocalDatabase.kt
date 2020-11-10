@@ -25,7 +25,7 @@ class TeamRoomLocalDatabase @Inject constructor(var operationLocalDatabase: Oper
     }
 
     override suspend fun getById(id: String): List<Team> {
-        return listOf()
+        return operationLocalDatabase.getById(id)
     }
 
     override suspend fun delete(team: Team) {

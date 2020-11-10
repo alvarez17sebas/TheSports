@@ -1,8 +1,9 @@
-package com.companytest.thesports.repository.database
+package com.companytest.thesports.repository.database.operation
 
 import com.companytest.thesports.data.database.OperationLocalDatabase
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.mapping.TeamMapping
+import com.companytest.thesports.repository.database.dao.TeamDao
 import com.companytest.thesports.repository.database.entity.TeamEntity
 import javax.inject.Inject
 
@@ -26,7 +27,8 @@ class OperationTeamLocalDatabaseImpl @Inject constructor(var teamDao: TeamDao) :
     }
 
     override suspend fun getById(id: String): List<Team> {
-        return listOf()
+        val teamsEntity: List<TeamEntity> = teamDao.getById(id)
+        return TeamMapping.toListTeamDomain(teamsEntity)
     }
 
     override suspend fun delete(data: Team) {

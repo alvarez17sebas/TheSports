@@ -5,16 +5,18 @@ import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.companytest.thesports.data.database.OperationLocalDatabase
+import com.companytest.thesports.domain.Event
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.repository.database.AppDatabase
-import com.companytest.thesports.repository.database.OperationTeamLocalDatabaseImpl
-import com.companytest.thesports.repository.database.TeamDao
+import com.companytest.thesports.repository.database.dao.EventDao
+import com.companytest.thesports.repository.database.operation.OperationTeamLocalDatabaseImpl
+import com.companytest.thesports.repository.database.dao.TeamDao
+import com.companytest.thesports.repository.database.operation.OperationEventLocalDatabaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
 @Module
@@ -44,7 +46,19 @@ object DatabaseModule {
     }
 
     @Provides
+    fun provideEventDao(database: AppDatabase): EventDao {
+        return database.eventDao()
+    }
+
+    @Provides
     fun provideTeamLocalRepository(teamDao: TeamDao): OperationLocalDatabase<Team> {
-        return OperationTeamLocalDatabaseImpl(teamDao)
+        return OperationTeamLocalDatabaseImpl(
+            teamDao
+        )
+    }
+
+    @Provides
+    fun provideEventLocalRepository(eventDao: EventDao): OperationLocalDatabase<Event> {
+        return OperationEventLocalDatabaseImpl(eventDao)
     }
 }

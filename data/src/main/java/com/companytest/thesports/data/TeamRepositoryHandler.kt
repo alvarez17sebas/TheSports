@@ -50,6 +50,10 @@ class TeamRepositoryHandler @Inject constructor(
     }
 
     suspend fun retrieveById(id: String): List<Team> {
-        return remoteTeamRepository.retrieveById(id)
+        var teams: List<Team> = localRepository.getById(id)
+        if(teams.isEmpty()){
+            teams = remoteTeamRepository.retrieveById(id)
+        }
+        return teams
     }
 }
