@@ -2,18 +2,21 @@ package com.companytest.thesports.data
 
 import com.companytest.thesports.data.network.TheSportService
 import com.companytest.thesports.domain.Team
-import com.companytest.thesports.domain.repository.Repository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import com.companytest.thesports.domain.repository.RemoteRepository
 import javax.inject.Inject
 
-class TeamRepository @Inject constructor(var sportService: TheSportService) :
-    Repository<Team> {
+class TeamRepositoryImpl @Inject constructor(var sportService: TheSportService) :
+    RemoteRepository<Team> {
 
-    override fun retrieveAll(leagueParameter: String): Flow<List<Team>> {
+    override suspend fun retrieveAll(leagueParameter: String): List<Team> {
+        return sportService.retrieveAllTeams(leagueParameter).teams
+    }
+
+    override suspend fun retrieveById(id: String): List<Team> {
+        return sportService.retrieveTeam(id).teams
+    }
+
+    /*override fun retrieveAll(leagueParameter: String): Flow<List<Team>> {
         var flow: Flow<List<Team>> = flow {
             emit(sportService.retrieveAllTeams(leagueParameter).teams)
         }.flowOn(Dispatchers.IO)
@@ -29,4 +32,7 @@ class TeamRepository @Inject constructor(var sportService: TheSportService) :
         return flow
     }
 
+    override fun save(data: Team) {
+
+    }*/
 }

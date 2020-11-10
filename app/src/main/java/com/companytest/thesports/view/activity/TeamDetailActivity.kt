@@ -38,12 +38,12 @@ class TeamDetailActivity : AppCompatActivity() {
 
         receiveTeamId()
 
-        //teamDetailViewModel.retrieveTeam(teamId)
-        //teamDetailViewModel.retrieveNextEventsByTeamId(teamId)
-        executeObservers()
+        teamDetailViewModel.retrieveTeam(teamId)
+        teamDetailViewModel.retrieveNextEventsByTeamId(teamId)
 
         setupEventRecyclerView()
 
+        executeObservers()
 
     }
 
@@ -76,17 +76,17 @@ class TeamDetailActivity : AppCompatActivity() {
     }
 
     private fun executeObservers() {
-        teamDetailViewModel.retrieveTeam(teamId).observe(this, Observer { team: Team ->
+        teamDetailViewModel.teamLiveData.observe(this, Observer { team: Team ->
             supportActionBar?.title = (team.strTeam)
             binding.tvTeamFoundationYear.text = team.intFormedYear
             binding.tvDescriptionTeamDetail.text = team.strDescriptionEN
             loadImage(team.strTeamBadge, binding.ivCoverPhoto)
-            loadImage(team.strTeamJersey, binding.ivJersey)
+            loadImage(team.strTeamJersey ?: "", binding.ivJersey)
 
             clickEvents(team)
         })
 
-        teamDetailViewModel.retrieveNextEventsByTeamId(teamId).observe(this, Observer { events: List<Event> ->
+        teamDetailViewModel.eventsLiveData.observe(this, Observer { events: List<Event> ->
             setRecyclerEventData(events)
         })
 
