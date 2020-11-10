@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 class OperationTeamLocalDatabaseImpl @Inject constructor(var teamDao: TeamDao) : OperationLocalDatabase<Team> {
     override fun save(data: Team) {
-        //val teamEntity: TeamEntity = TeamMapping.toTeamEntity(data)
-        //teamDao.save(teamEntity)
+        val teamEntity: TeamEntity = TeamMapping.toTeamEntity(data)
+        teamDao.save(teamEntity)
     }
 
     override fun saveAll(dataList: List<Team>) {

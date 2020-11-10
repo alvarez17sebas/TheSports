@@ -16,6 +16,6 @@ data class TeamEntity(
     val str_instagram: String = "",
     val str_descriptionEN: String = "",
     val str_teamBadge: String = "",
-    val st_teamJersey: String = "",
+    val st_teamJersey: String? = "",
     val str_youtube: String = ""
 )

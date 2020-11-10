@@ -1,7 +1,7 @@
 package com.companytest.thesports
 
-import com.companytest.thesports.domain.repository.Repository
-import com.companytest.thesports.data.RepositoryHandler
+import com.companytest.thesports.domain.repository.TeamRepository
+import com.companytest.thesports.data.TeamRepositoryHandler
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.usecases.RetrieveTeam
 import io.mockk.MockKAnnotations
@@ -20,19 +20,19 @@ import org.junit.Test
 class RetrieveTeamTest {
 
     @RelaxedMockK
-    lateinit var repository: Repository<Team>
-    lateinit var repositoryHandler: RepositoryHandler<Team>
+    lateinit var teamRepository: TeamRepository
+    lateinit var teamRepositoryHandler: TeamRepositoryHandler
 
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        repositoryHandler = RepositoryHandler(repository)
+        teamRepositoryHandler = TeamRepositoryHandler(teamRepository)
     }
 
     @Test
     fun `retrieveTeam return team object success`() {
         //Arrange
-        val retrieveTeam: RetrieveTeam = RetrieveTeam(repository)
+        val retrieveTeam: RetrieveTeam = RetrieveTeam(teamRepository)
         val param: String = ""
         var fakeResponse: Flow<List<Team>> = flowOf(listOf(Team()))
         val expectedValue: Team = Team()
@@ -40,7 +40,7 @@ class RetrieveTeamTest {
 
         //Act
         coEvery {
-            repositoryHandler.retrieveById(param)
+            teamRepositoryHandler.retrieveById(param)
         } returns fakeResponse
 
         runBlocking {
