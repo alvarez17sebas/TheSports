@@ -8,27 +8,27 @@ import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class TeamRoomLocalDatabase @Inject constructor(var operationLocalDatabase: OperationLocalDatabase<Team>): TeamLocalRepository {
-    override fun save(team: Team) {
+    override suspend fun save(team: Team) {
         operationLocalDatabase.save(team)
     }
 
-    override fun saveAll(teams: List<Team>) {
+    override suspend fun saveAll(teams: List<Team>) {
         operationLocalDatabase.saveAll(teams)
     }
 
-    override fun update(team: Team) {
+    override suspend fun update(team: Team) {
         operationLocalDatabase.update(team)
     }
 
-    override fun getAll(leagueParameter: String): Flow<List<Team>> {
+    override suspend fun getAll(leagueParameter: String): List<Team> {
         return operationLocalDatabase.getAll()
     }
 
-    override fun getById(id: String): Flow<List<Team>> {
-        return flowOf()
+    override suspend fun getById(id: String): List<Team> {
+        return listOf()
     }
 
-    override fun delete(team: Team) {
+    override suspend fun delete(team: Team) {
         operationLocalDatabase.delete(team)
 
     }

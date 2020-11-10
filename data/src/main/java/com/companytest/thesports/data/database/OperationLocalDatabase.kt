@@ -4,15 +4,15 @@ import kotlinx.coroutines.flow.Flow
 
 interface OperationLocalDatabase<T>{
 
-    fun save(data: T)
+    suspend fun save(data: T)
 
-    fun saveAll(dataList: List<T>)
+    suspend fun saveAll(dataList: List<T>)
 
-    fun update(data: T)
+    suspend fun update(data: T)
 
-    fun getAll(): Flow<List<T>>
+    suspend fun getAll(): List<T>
 
-    fun getById(id: String): Flow<List<T>>
+    suspend fun getById(id: String): List<T>
 
-    fun delete(data: T)
+    suspend fun delete(data: T)
 }

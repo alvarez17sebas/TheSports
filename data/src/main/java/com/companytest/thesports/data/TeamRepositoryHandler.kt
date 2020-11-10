@@ -15,7 +15,16 @@ class TeamRepositoryHandler @Inject constructor(
 
     suspend fun retrieveAll(leagueParameter: String): List<Team> {
 
-        return remoteTeamRepository.retrieveAll(leagueParameter)
+        var teams: List<Team> = listOf()
+        teams = localRepository.getAll(leagueParameter)
+
+        if(teams.isEmpty()){
+            teams = remoteTeamRepository.retrieveAll(leagueParameter)
+            teams.forEach {
+                localRepository.save(it)
+            }
+        }
+        return teams
 
         /*var teams: List<Team>? = localRepository.getAll(leagueParameter).singleOrNull()
 

@@ -3,30 +3,32 @@ package com.companytest.thesports.repository.database
 import com.companytest.thesports.data.database.OperationLocalDatabase
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.mapping.TeamMapping
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import com.companytest.thesports.repository.database.entity.TeamEntity
 import javax.inject.Inject
 
 class OperationTeamLocalDatabaseImpl @Inject constructor(var teamDao: TeamDao) : OperationLocalDatabase<Team> {
-    override fun save(data: Team) {
+    override suspend fun save(data: Team) {
         val teamEntity: TeamEntity = TeamMapping.toTeamEntity(data)
         teamDao.save(teamEntity)
     }
 
-    override fun saveAll(dataList: List<Team>) {
+    override suspend fun saveAll(dataList: List<Team>) {
+        val teamsEntity: List<TeamEntity> = TeamMapping.toListTeamEntity(dataList)
+        teamDao.saveAll(teamsEntity)
     }
 
-    override fun update(data: Team) {
+    override suspend fun update(data: Team) {
     }
 
-    override fun getAll(): Flow<List<Team>> {
-        return flowOf()
+    override suspend fun getAll(): List<Team> {
+        val teamsEntity: List<TeamEntity> = teamDao.getAll()
+        return TeamMapping.toListTeamDomain(teamsEntity)
     }
 
-    override fun getById(id: String): Flow<List<Team>> {
-        return flowOf()
+    override suspend fun getById(id: String): List<Team> {
+        return listOf()
     }
 
-    override fun delete(data: Team) {
+    override suspend fun delete(data: Team) {
     }
 }

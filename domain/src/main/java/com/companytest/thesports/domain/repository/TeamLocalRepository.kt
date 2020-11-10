@@ -4,15 +4,15 @@ import com.companytest.thesports.domain.Team
 import kotlinx.coroutines.flow.Flow
 
 interface TeamLocalRepository {
-    fun save(team: Team)
+    suspend fun save(team: Team)
 
-    fun saveAll(teams: List<Team>)
+    suspend fun saveAll(teams: List<Team>)
 
-    fun update(team: Team)
+    suspend fun update(team: Team)
 
-    fun getAll(leagueParameter: String): Flow<List<Team>>
+    suspend fun getAll(leagueParameter: String): List<Team>
 
-    fun getById(id: String): Flow<List<Team>>
+    suspend fun getById(id: String): List<Team>
 
-    fun delete(team: Team)
+    suspend fun delete(team: Team)
 }

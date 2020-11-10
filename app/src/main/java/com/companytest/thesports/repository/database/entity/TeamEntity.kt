@@ -1,4 +1,4 @@
-package com.companytest.thesports.repository.database
+package com.companytest.thesports.repository.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,26 +1,25 @@
 package com.companytest.thesports.repository.database
 
 import androidx.room.*
-import com.companytest.thesports.data.database.OperationLocalDatabase
-import kotlinx.coroutines.flow.Flow
+import com.companytest.thesports.repository.database.entity.TeamEntity
 
 @Dao
 interface TeamDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun save(team: TeamEntity)
+    suspend fun save(team: TeamEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun saveAll(teams: List<TeamEntity>)
+    suspend fun saveAll(teams: List<TeamEntity>)
 
     @Update
-     fun update(team: TeamEntity)
+    suspend fun update(team: TeamEntity)
 
     @Query("SELECT * FROM team")
-    fun getAll(): Flow<List<TeamEntity>>
+    suspend fun getAll(): List<TeamEntity>
 
     @Query("SELECT * FROM team WHERE id_team = :id")
-    fun getById(id: String): Flow<List<TeamEntity>>
+    suspend fun getById(id: String): List<TeamEntity>
 
     @Delete
-    fun delete(data: TeamEntity)
+    suspend fun delete(data: TeamEntity)
 }
