@@ -2,12 +2,10 @@ package com.companytest.thesports.data
 
 import com.companytest.thesports.data.database.OperationLocalDatabase
 import com.companytest.thesports.domain.Team
-import com.companytest.thesports.domain.repository.TeamLocalRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import com.companytest.thesports.domain.repository.LocalRepository
 import javax.inject.Inject
 
-class TeamRoomLocalDatabase @Inject constructor(var operationLocalDatabase: OperationLocalDatabase<Team>): TeamLocalRepository {
+class TeamLocalDatabase @Inject constructor(var operationLocalDatabase: OperationLocalDatabase<Team>): LocalRepository<Team> {
     override suspend fun save(team: Team) {
         operationLocalDatabase.save(team)
     }

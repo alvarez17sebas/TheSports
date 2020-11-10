@@ -1,16 +1,13 @@
 package com.companytest.thesports.di
 
 import com.companytest.thesports.data.EventRepositoryImpl
-import com.companytest.thesports.data.EventRoomLocalDatabase
+import com.companytest.thesports.data.EventLocalDatabase
 import com.companytest.thesports.data.TeamRepositoryImpl
-import com.companytest.thesports.data.TeamRoomLocalDatabase
+import com.companytest.thesports.data.TeamLocalDatabase
 import com.companytest.thesports.data.database.OperationLocalDatabase
 import com.companytest.thesports.domain.Event
 import com.companytest.thesports.domain.Team
-import com.companytest.thesports.domain.repository.EventLocalRepository
-import com.companytest.thesports.domain.repository.EventRepository
-import com.companytest.thesports.domain.repository.TeamRepository
-import com.companytest.thesports.domain.repository.TeamLocalRepository
+import com.companytest.thesports.domain.repository.*
 import com.companytest.thesports.repository.network.SportService
 import dagger.Module
 import dagger.Provides
@@ -23,22 +20,22 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 object TeamRepositoryModule {
 
     @Provides
-    fun provideTeamRepository(sportService: SportService): TeamRepository {
+    fun provideTeamRepository(sportService: SportService): RemoteRepository<Team> {
         return TeamRepositoryImpl(sportService)
     }
 
     @Provides
-    fun provideEventRepository(sportService: SportService): EventRepository {
+    fun provideEventRepository(sportService: SportService): RemoteRepository<Event> {
         return EventRepositoryImpl(sportService)
     }
 
     @Provides
-    fun provideTeamLocalRepository(operationLocalDatabase: OperationLocalDatabase<Team>): TeamLocalRepository {
-        return TeamRoomLocalDatabase(operationLocalDatabase)
+    fun provideTeamLocalRepository(operationLocalDatabase: OperationLocalDatabase<Team>): LocalRepository<Team> {
+        return TeamLocalDatabase(operationLocalDatabase)
     }
 
     @Provides
-    fun provideEventLocalRepository(operationLocalDatabase: OperationLocalDatabase<Event>): EventLocalRepository {
-        return EventRoomLocalDatabase(operationLocalDatabase)
+    fun provideEventLocalRepository(operationLocalDatabase: OperationLocalDatabase<Event>): LocalRepository<Event> {
+        return EventLocalDatabase(operationLocalDatabase)
     }
 }

@@ -2,16 +2,11 @@ package com.companytest.thesports.data
 
 import com.companytest.thesports.data.network.TheSportService
 import com.companytest.thesports.domain.Team
-import com.companytest.thesports.domain.repository.TeamRepository
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import com.companytest.thesports.domain.repository.RemoteRepository
 import javax.inject.Inject
 
 class TeamRepositoryImpl @Inject constructor(var sportService: TheSportService) :
-    TeamRepository {
+    RemoteRepository<Team> {
 
     override suspend fun retrieveAll(leagueParameter: String): List<Team> {
         return sportService.retrieveAllTeams(leagueParameter).teams

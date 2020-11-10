@@ -2,10 +2,10 @@ package com.companytest.thesports.data
 
 import com.companytest.thesports.data.database.OperationLocalDatabase
 import com.companytest.thesports.domain.Event
-import com.companytest.thesports.domain.repository.EventLocalRepository
+import com.companytest.thesports.domain.repository.LocalRepository
 import javax.inject.Inject
 
-class EventRoomLocalDatabase @Inject constructor(var operationLocalDatabase: OperationLocalDatabase<Event>) : EventLocalRepository {
+class EventLocalDatabase @Inject constructor(var operationLocalDatabase: OperationLocalDatabase<Event>) : LocalRepository<Event> {
     override suspend fun save(event: Event) {
         operationLocalDatabase.save(event)
     }
