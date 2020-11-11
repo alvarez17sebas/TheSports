@@ -11,8 +11,7 @@ class EventRepositoryHandler @Inject constructor(
 ) : RepositoryHandler<Event>(localRepository, remoteRepository) {
 
     override suspend fun localSave(data: Event, id: String) {
-        data.idTeam = id
-        localRepository.save(data)
+        localRepository.save(data.apply { idTeam = id })
     }
 
 }

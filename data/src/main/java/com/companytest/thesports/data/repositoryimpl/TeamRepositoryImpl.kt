@@ -1,6 +1,6 @@
-package com.companytest.thesports.data
+package com.companytest.thesports.data.repositoryimpl
 
-import com.companytest.thesports.data.network.TheSportService
+import com.companytest.thesports.data.datasource.network.TheSportService
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.domain.repository.RemoteRepository
 import javax.inject.Inject

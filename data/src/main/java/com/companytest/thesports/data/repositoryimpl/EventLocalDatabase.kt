@@ -1,6 +1,6 @@
-package com.companytest.thesports.data
+package com.companytest.thesports.data.repositoryimpl
 
-import com.companytest.thesports.data.database.OperationLocalDatabase
+import com.companytest.thesports.data.datasource.database.OperationLocalDatabase
 import com.companytest.thesports.domain.Event
 import com.companytest.thesports.domain.repository.LocalRepository
 import javax.inject.Inject

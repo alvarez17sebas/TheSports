@@ -1,12 +1,13 @@
 package com.companytest.thesports.repository.database.operation
 
-import com.companytest.thesports.data.database.OperationLocalDatabase
+import com.companytest.thesports.data.datasource.database.OperationLocalDatabase
 import com.companytest.thesports.domain.Event
 import com.companytest.thesports.mapping.EventMapping
 import com.companytest.thesports.repository.database.dao.EventDao
 import com.companytest.thesports.repository.database.entity.EventEntity
 
-class OperationEventLocalDatabaseImpl constructor(var eventDao: EventDao) : OperationLocalDatabase<Event> {
+class OperationEventLocalDatabaseImpl constructor(var eventDao: EventDao) :
+    OperationLocalDatabase<Event> {
     override suspend fun save(data: Event) {
         val eventEntity: EventEntity = EventMapping.toEventEntity(data)
         eventDao.save(eventEntity)

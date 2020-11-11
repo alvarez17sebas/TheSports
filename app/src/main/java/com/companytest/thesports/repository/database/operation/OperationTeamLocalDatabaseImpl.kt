@@ -1,13 +1,14 @@
 package com.companytest.thesports.repository.database.operation
 
-import com.companytest.thesports.data.database.OperationLocalDatabase
+import com.companytest.thesports.data.datasource.database.OperationLocalDatabase
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.mapping.TeamMapping
 import com.companytest.thesports.repository.database.dao.TeamDao
 import com.companytest.thesports.repository.database.entity.TeamEntity
 import javax.inject.Inject
 
-class OperationTeamLocalDatabaseImpl @Inject constructor(var teamDao: TeamDao) : OperationLocalDatabase<Team> {
+class OperationTeamLocalDatabaseImpl @Inject constructor(var teamDao: TeamDao) :
+    OperationLocalDatabase<Team> {
     override suspend fun save(data: Team) {
         val teamEntity: TeamEntity = TeamMapping.toTeamEntity(data)
         teamDao.save(teamEntity)

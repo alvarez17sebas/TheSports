@@ -1,10 +1,10 @@
 package com.companytest.thesports.di
 
-import com.companytest.thesports.data.EventRepositoryImpl
-import com.companytest.thesports.data.EventLocalDatabase
-import com.companytest.thesports.data.TeamRepositoryImpl
-import com.companytest.thesports.data.TeamLocalDatabase
-import com.companytest.thesports.data.database.OperationLocalDatabase
+import com.companytest.thesports.data.repositoryimpl.EventRepositoryImpl
+import com.companytest.thesports.data.repositoryimpl.EventLocalDatabase
+import com.companytest.thesports.data.repositoryimpl.TeamRepositoryImpl
+import com.companytest.thesports.data.repositoryimpl.TeamLocalDatabase
+import com.companytest.thesports.data.datasource.database.OperationLocalDatabase
 import com.companytest.thesports.domain.Event
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.domain.repository.*
@@ -21,21 +21,29 @@ object TeamRepositoryModule {
 
     @Provides
     fun provideTeamRepository(sportService: SportService): RemoteRepository<Team> {
-        return TeamRepositoryImpl(sportService)
+        return TeamRepositoryImpl(
+            sportService
+        )
     }
 
     @Provides
     fun provideEventRepository(sportService: SportService): RemoteRepository<Event> {
-        return EventRepositoryImpl(sportService)
+        return EventRepositoryImpl(
+            sportService
+        )
     }
 
     @Provides
     fun provideTeamLocalRepository(operationLocalDatabase: OperationLocalDatabase<Team>): LocalRepository<Team> {
-        return TeamLocalDatabase(operationLocalDatabase)
+        return TeamLocalDatabase(
+            operationLocalDatabase
+        )
     }
 
     @Provides
     fun provideEventLocalRepository(operationLocalDatabase: OperationLocalDatabase<Event>): LocalRepository<Event> {
-        return EventLocalDatabase(operationLocalDatabase)
+        return EventLocalDatabase(
+            operationLocalDatabase
+        )
     }
 }

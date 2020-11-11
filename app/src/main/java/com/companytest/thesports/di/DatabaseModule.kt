@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.companytest.thesports.data.database.OperationLocalDatabase
+import com.companytest.thesports.data.datasource.database.OperationLocalDatabase
 import com.companytest.thesports.domain.Event
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.repository.database.AppDatabase

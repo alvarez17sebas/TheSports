@@ -1,4 +1,4 @@
-package com.companytest.thesports.data.database
+package com.companytest.thesports.data.datasource.database
 
 import kotlinx.coroutines.flow.Flow
 

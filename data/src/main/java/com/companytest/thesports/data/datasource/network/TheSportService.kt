@@ -1,4 +1,4 @@
-package com.companytest.thesports.data.network
+package com.companytest.thesports.data.datasource.network
 
 import com.companytest.thesports.domain.ResponseEvent
 import com.companytest.thesports.domain.TeamResponse
