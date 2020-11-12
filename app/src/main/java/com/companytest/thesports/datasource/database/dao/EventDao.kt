@@ -1,7 +1,7 @@
-package com.companytest.thesports.repository.database.dao
+package com.companytest.thesports.datasource.database.dao
 
 import androidx.room.*
-import com.companytest.thesports.repository.database.entity.EventEntity
+import com.companytest.thesports.datasource.database.entity.EventEntity
 
 @Dao
 interface EventDao {

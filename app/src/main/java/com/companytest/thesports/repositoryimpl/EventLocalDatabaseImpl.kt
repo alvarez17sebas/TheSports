@@ -1,13 +1,13 @@
-package com.companytest.thesports.repository.database.operation
+package com.companytest.thesports.repositoryimpl
 
-import com.companytest.thesports.data.datasource.database.OperationLocalDatabase
 import com.companytest.thesports.domain.Event
+import com.companytest.thesports.domain.repository.LocalRepository
 import com.companytest.thesports.mapping.EventMapping
-import com.companytest.thesports.repository.database.dao.EventDao
-import com.companytest.thesports.repository.database.entity.EventEntity
+import com.companytest.thesports.datasource.database.dao.EventDao
+import com.companytest.thesports.datasource.database.entity.EventEntity
+import javax.inject.Inject
 
-class OperationEventLocalDatabaseImpl constructor(var eventDao: EventDao) :
-    OperationLocalDatabase<Event> {
+class EventLocalDatabaseImpl @Inject constructor(var eventDao: EventDao) : LocalRepository<Event> {
     override suspend fun save(data: Event) {
         val eventEntity: EventEntity = EventMapping.toEventEntity(data)
         eventDao.save(eventEntity)
@@ -20,7 +20,7 @@ class OperationEventLocalDatabaseImpl constructor(var eventDao: EventDao) :
     override suspend fun update(data: Event) {
     }
 
-    override suspend fun getAll(): List<Event> {
+    override suspend fun getAll(leagueParameter: String): List<Event> {
         val events: List<Event> = EventMapping.toListEventDomain(eventDao.getAll())
         return events
     }
@@ -34,4 +34,5 @@ class OperationEventLocalDatabaseImpl constructor(var eventDao: EventDao) :
         val eventEntity: EventEntity = EventMapping.toEventEntity(data)
         eventDao.delete(eventEntity)
     }
+
 }

@@ -1,7 +1,7 @@
 package com.companytest.thesports.mapping
 
 import com.companytest.thesports.domain.Team
-import com.companytest.thesports.repository.database.entity.TeamEntity
+import com.companytest.thesports.datasource.database.entity.TeamEntity
 
 class TeamMapping {
     companion object {

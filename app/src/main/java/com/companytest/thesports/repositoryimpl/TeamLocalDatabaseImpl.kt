@@ -1,14 +1,13 @@
-package com.companytest.thesports.repository.database.operation
+package com.companytest.thesports.repositoryimpl
 
-import com.companytest.thesports.data.datasource.database.OperationLocalDatabase
 import com.companytest.thesports.domain.Team
+import com.companytest.thesports.domain.repository.LocalRepository
 import com.companytest.thesports.mapping.TeamMapping
-import com.companytest.thesports.repository.database.dao.TeamDao
-import com.companytest.thesports.repository.database.entity.TeamEntity
+import com.companytest.thesports.datasource.database.dao.TeamDao
+import com.companytest.thesports.datasource.database.entity.TeamEntity
 import javax.inject.Inject
 
-class OperationTeamLocalDatabaseImpl @Inject constructor(var teamDao: TeamDao) :
-    OperationLocalDatabase<Team> {
+class TeamLocalDatabaseImpl @Inject constructor(var teamDao: TeamDao): LocalRepository<Team> {
     override suspend fun save(data: Team) {
         val teamEntity: TeamEntity = TeamMapping.toTeamEntity(data)
         teamDao.save(teamEntity)
@@ -22,7 +21,7 @@ class OperationTeamLocalDatabaseImpl @Inject constructor(var teamDao: TeamDao) :
     override suspend fun update(data: Team) {
     }
 
-    override suspend fun getAll(): List<Team> {
+    override suspend fun getAll(leagueParameter: String): List<Team> {
         val teamsEntity: List<TeamEntity> = teamDao.getAll()
         return TeamMapping.toListTeamDomain(teamsEntity)
     }
@@ -34,4 +33,5 @@ class OperationTeamLocalDatabaseImpl @Inject constructor(var teamDao: TeamDao) :
 
     override suspend fun delete(data: Team) {
     }
+
 }

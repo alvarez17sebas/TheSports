@@ -1,7 +1,7 @@
 package com.companytest.thesports
 
 import com.companytest.thesports.domain.repository.TeamRepository
-import com.companytest.thesports.data.handler.TeamRepositoryHandler
+import com.companytest.thesports.data.TeamRepositoryHandler
 import com.companytest.thesports.domain.Event
 import com.companytest.thesports.usecases.RetrieveAllEventsByTeamId
 import io.mockk.MockKAnnotations

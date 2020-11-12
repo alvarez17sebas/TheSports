@@ -1,5 +1,6 @@
-package com.companytest.thesports.data.handler
+package com.companytest.thesports.data
 
+import com.companytest.thesports.data.RepositoryHandler
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.domain.repository.LocalRepository
 import com.companytest.thesports.domain.repository.RemoteRepository

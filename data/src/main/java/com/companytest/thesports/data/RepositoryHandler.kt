@@ -1,4 +1,4 @@
-package com.companytest.thesports.data.handler
+package com.companytest.thesports.data
 
 import com.companytest.thesports.domain.repository.LocalRepository
 import com.companytest.thesports.domain.repository.RemoteRepository

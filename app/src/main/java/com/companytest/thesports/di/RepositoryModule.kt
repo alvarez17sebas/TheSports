@@ -1,14 +1,16 @@
 package com.companytest.thesports.di
 
-import com.companytest.thesports.data.repositoryimpl.EventRepositoryImpl
-import com.companytest.thesports.data.repositoryimpl.EventLocalDatabase
-import com.companytest.thesports.data.repositoryimpl.TeamRepositoryImpl
-import com.companytest.thesports.data.repositoryimpl.TeamLocalDatabase
-import com.companytest.thesports.data.datasource.database.OperationLocalDatabase
 import com.companytest.thesports.domain.Event
 import com.companytest.thesports.domain.Team
-import com.companytest.thesports.domain.repository.*
-import com.companytest.thesports.repository.network.SportService
+import com.companytest.thesports.domain.repository.LocalRepository
+import com.companytest.thesports.domain.repository.RemoteRepository
+import com.companytest.thesports.datasource.database.dao.EventDao
+import com.companytest.thesports.datasource.database.dao.TeamDao
+import com.companytest.thesports.datasource.network.SportService
+import com.companytest.thesports.repositoryimpl.EventLocalDatabaseImpl
+import com.companytest.thesports.repositoryimpl.EventRepositoryImpl
+import com.companytest.thesports.repositoryimpl.TeamLocalDatabaseImpl
+import com.companytest.thesports.repositoryimpl.TeamRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,16 +36,16 @@ object TeamRepositoryModule {
     }
 
     @Provides
-    fun provideTeamLocalRepository(operationLocalDatabase: OperationLocalDatabase<Team>): LocalRepository<Team> {
-        return TeamLocalDatabase(
-            operationLocalDatabase
+    fun provideTeamLocalRepository(teamDao: TeamDao): LocalRepository<Team> {
+        return TeamLocalDatabaseImpl(
+            teamDao
         )
     }
 
     @Provides
-    fun provideEventLocalRepository(operationLocalDatabase: OperationLocalDatabase<Event>): LocalRepository<Event> {
-        return EventLocalDatabase(
-            operationLocalDatabase
+    fun provideEventLocalRepository(eventDao: EventDao): LocalRepository<Event> {
+        return EventLocalDatabaseImpl(
+            eventDao
         )
     }
 }
