@@ -1,8 +1,12 @@
 package com.companytest.thesports
 
-import com.companytest.thesports.domain.repository.Repository
+import com.companytest.thesports.data.EventRepositoryHandler
 import com.companytest.thesports.data.RepositoryHandler
+import com.companytest.thesports.data.TeamRepositoryHandler
 import com.companytest.thesports.domain.Event
+import com.companytest.thesports.domain.Team
+import com.companytest.thesports.domain.repository.LocalRepository
+import com.companytest.thesports.domain.repository.RemoteRepository
 import com.companytest.thesports.usecases.RetrieveAllEventsByTeamId
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -20,19 +24,25 @@ import org.junit.Test
 class RetrieveAllEventsByTeamIdTest {
 
     @RelaxedMockK
-    lateinit var repository: Repository<Event>
-    lateinit var repositoryHandler: RepositoryHandler<Event>
+    lateinit var remoteRepository: RemoteRepository<Event>
+    @RelaxedMockK
+    lateinit var localRepository: LocalRepository<Event>
+    lateinit var eventRepositoryHandler: EventRepositoryHandler
 
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        repositoryHandler = RepositoryHandler(repository)
+        eventRepositoryHandler =
+            EventRepositoryHandler(
+                localRepository,
+                remoteRepository
+            )
     }
 
     @Test
     fun `retrieveAllEventsByTeamId return all event success`() {
         //Arrange
-        val retrieveEvents: RetrieveAllEventsByTeamId = RetrieveAllEventsByTeamId(repositoryHandler)
+        val retrieveEvents: RetrieveAllEventsByTeamId = RetrieveAllEventsByTeamId(eventRepositoryHandler)
         val parameter: String = ""
         val fakeResponse: Flow<List<Event>> = flowOf(listOf(Event(), Event(), Event()))
         val responseExpected: List<Event> = listOf(Event(), Event(), Event())
@@ -40,7 +50,7 @@ class RetrieveAllEventsByTeamIdTest {
 
         //Act
         coEvery {
-            repositoryHandler.retrieveById(parameter)
+            eventRepositoryHandler.retrieveById(parameter)
         } returns fakeResponse
 
         runBlocking {

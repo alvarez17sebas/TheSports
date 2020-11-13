@@ -1,16 +1,15 @@
 package com.companytest.thesports
 
-import com.companytest.thesports.domain.repository.Repository
-import com.companytest.thesports.data.RepositoryHandler
+import com.companytest.thesports.data.TeamRepositoryHandler
 import com.companytest.thesports.domain.Team
+import com.companytest.thesports.domain.repository.LocalRepository
+import com.companytest.thesports.domain.repository.RemoteRepository
 import com.companytest.thesports.usecases.RetrieveAllTeams
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.unmockkAll
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.single
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert
@@ -20,20 +19,26 @@ import org.junit.Test
 class RetrieveAllTeamTest {
 
     @RelaxedMockK
-    lateinit var repository: Repository<Team>
-    lateinit var repositoryHandler: RepositoryHandler<Team>
+    lateinit var teamRemoteRepository: RemoteRepository<Team>
+    @RelaxedMockK
+    lateinit var localRepository: LocalRepository<Team>
+    lateinit var teamRepositoryHandler: TeamRepositoryHandler
 
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        repositoryHandler = RepositoryHandler(repository)
+        teamRepositoryHandler =
+            TeamRepositoryHandler(
+                localRepository,
+                teamRemoteRepository
+            )
     }
 
     @Test
     fun retrieveAllTeams_getAllItems_success() {
 
         //Arrange
-        val retrieveAllTeam: RetrieveAllTeams = RetrieveAllTeams(RepositoryHandler(repository))
+        val retrieveAllTeam: RetrieveAllTeams = RetrieveAllTeams(teamRepositoryHandler)
         val parameter: String = ""
         var fakeResponse: Flow<List<Team>> = flowOf(listOf(Team(), Team()))
         val valueExpected = 2
@@ -41,8 +46,12 @@ class RetrieveAllTeamTest {
 
         //Act
         coEvery {
-            repositoryHandler.retrieveAll(parameter)
+            teamRepositoryHandler.retrieveAll(parameter)
         } returns fakeResponse
+
+        fakeResponse.map {
+            val a = ""
+        }
 
         runBlocking {
             response = retrieveAllTeam.retrieveTeams(parameter).single()
@@ -56,19 +65,21 @@ class RetrieveAllTeamTest {
     @Test
     fun `retrieveAllItems and to get empty list`() {
         //Arrange
-        val retrieveAllTeam: RetrieveAllTeams = RetrieveAllTeams(RepositoryHandler(repository))
+        val retrieveAllTeam: RetrieveAllTeams = RetrieveAllTeams(teamRepositoryHandler)
         val parameter: String = ""
-        var fakeResponse: Flow<List<Team>> = flowOf(ArrayList())
+        var fakeResponse: Flow<List<Team>> = flowOf(listOf())
         val valueExpected = 0
         var response: List<Team>? = null
 
         //Act
         coEvery {
-            repositoryHandler.retrieveAll(parameter)
+            teamRepositoryHandler.retrieveAll(parameter)
         } returns fakeResponse
 
         runBlocking {
-            response = retrieveAllTeam.retrieveTeams(parameter).single()
+           retrieveAllTeam.retrieveTeams(parameter).collect {
+                val a = ""
+            }
         }
 
         //Assert

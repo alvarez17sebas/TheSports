@@ -1,4 +1,4 @@
-package com.companytest.thesports.repository.network
+package com.companytest.thesports.datasource.network
 
 import android.util.Log
 import okhttp3.Interceptor
