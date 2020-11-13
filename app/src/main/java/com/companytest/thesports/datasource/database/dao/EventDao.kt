@@ -2,6 +2,7 @@ package com.companytest.thesports.datasource.database.dao
 
 import androidx.room.*
 import com.companytest.thesports.datasource.database.entity.EventEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface EventDao {
@@ -15,10 +16,10 @@ interface EventDao {
     suspend fun update(event: EventEntity)
 
     @Query("SELECT * FROM event")
-    suspend fun getAll(): List<EventEntity>
+    fun getAll(): Flow<List<EventEntity>>
 
     @Query("SELECT * FROM event WHERE id_team = :id")
-    suspend fun getById(id: String): List<EventEntity>
+    fun getById(id: String): Flow<List<EventEntity>>
 
     @Delete
     suspend fun delete(data: EventEntity)

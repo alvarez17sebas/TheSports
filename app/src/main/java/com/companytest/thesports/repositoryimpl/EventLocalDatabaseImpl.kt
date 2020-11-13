@@ -1,10 +1,12 @@
 package com.companytest.thesports.repositoryimpl
 
+import com.companytest.thesports.datasource.database.dao.EventDao
+import com.companytest.thesports.datasource.database.entity.EventEntity
 import com.companytest.thesports.domain.Event
 import com.companytest.thesports.domain.repository.LocalRepository
 import com.companytest.thesports.mapping.EventMapping
-import com.companytest.thesports.datasource.database.dao.EventDao
-import com.companytest.thesports.datasource.database.entity.EventEntity
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class EventLocalDatabaseImpl @Inject constructor(var eventDao: EventDao) : LocalRepository<Event> {
@@ -20,14 +22,16 @@ class EventLocalDatabaseImpl @Inject constructor(var eventDao: EventDao) : Local
     override suspend fun update(data: Event) {
     }
 
-    override suspend fun getAll(leagueParameter: String): List<Event> {
-        val events: List<Event> = EventMapping.toListEventDomain(eventDao.getAll())
-        return events
+    override fun getAll(leagueParameter: String): Flow<List<Event>> {
+        return eventDao.getAll().map {
+            EventMapping.toListEventDomain(it)
+        }
     }
 
-    override suspend fun getById(id: String): List<Event> {
-        val events: List<Event> = EventMapping.toListEventDomain(eventDao.getById(id))
-        return events
+    override fun getById(id: String): Flow<List<Event>> {
+        return eventDao.getById(id).map {
+            EventMapping.toListEventDomain(it)
+        }
     }
 
     override suspend fun delete(data: Event) {

@@ -3,6 +3,7 @@ package com.companytest.thesports.datasource.database.dao
 import androidx.room.*
 import com.companytest.thesports.datasource.database.entity.TeamEntity
 import com.companytest.thesports.datasource.database.entity.TeamWithEvents
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TeamDao {
@@ -16,15 +17,15 @@ interface TeamDao {
     suspend fun update(team: TeamEntity)
 
     @Query("SELECT * FROM team")
-    suspend fun getAll(): List<TeamEntity>
+    fun getAll(): Flow<List<TeamEntity>>
 
     @Query("SELECT * FROM team WHERE id_team = :id")
-    suspend fun getById(id: String): List<TeamEntity>
+    fun getById(id: String): Flow<List<TeamEntity>>
 
     @Delete
     suspend fun delete(data: TeamEntity)
 
     @Transaction
     @Query("SELECT * FROM team")
-    fun getTeamWithEvents(): List<TeamWithEvents>
+    suspend fun getTeamWithEvents(): List<TeamWithEvents>
 }

@@ -10,7 +10,10 @@ class TeamRepositoryHandler @Inject constructor(
     localRepository: LocalRepository<Team>,
     remoteRepository: RemoteRepository<Team>
 ) : RepositoryHandler<Team>(localRepository, remoteRepository) {
-    override suspend fun localSave(data: Team, id: String) {
-        localRepository.save(data)
+
+    override suspend fun localSave(dataList: List<Team>, id: String) {
+        dataList.forEach {team: Team ->
+            localRepository.save(team)
+        }
     }
 }

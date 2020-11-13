@@ -28,6 +28,7 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
         setupDataBinding()
         setupRecyclerView()
 
+
         teamListViewModel.retrieveAllTeams(getString(R.string.spanish_league))
 
         radioButtonsClick()
@@ -51,6 +52,7 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
     }
 
     private fun executeObserves(){
+
         teamListViewModel.teamsLiveData
             .observe(this, Observer {teams: List<Team> ->
                 setRecycleData(teams)

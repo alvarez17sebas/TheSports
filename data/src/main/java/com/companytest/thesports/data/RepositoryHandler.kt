@@ -2,34 +2,41 @@ package com.companytest.thesports.data
 
 import com.companytest.thesports.domain.repository.LocalRepository
 import com.companytest.thesports.domain.repository.RemoteRepository
+import kotlinx.coroutines.flow.*
 
 abstract class RepositoryHandler<T> constructor(
     val localRepository: LocalRepository<T>,
     val remoteRepository: RemoteRepository<T>
 ) {
-    suspend fun retrieveAll(parameter: String): List<T> {
-        var dataList: List<T> = listOf()
-        dataList = localRepository.getAll(parameter)
 
-        if(dataList.isEmpty()){
-            dataList = remoteRepository.retrieveAll(parameter)
-            dataList.forEach {
-                localRepository.save(it)
+    fun retrieveAll(parameter: String): Flow<List<T>> {
+
+        return  localRepository.getAll(parameter).flatMapLatest { localData: List<T> ->
+            if(localData.isNotEmpty())
+                flowOf(localData)
+            else{
+                remoteRepository.retrieveAll(parameter).map {
+                    localRepository.saveAll(it)
+                    it
+                }
             }
         }
-        return dataList
     }
 
-    suspend fun retrieveById(id: String): List<T> {
-        var dataList: List<T> = localRepository.getById(id)
-        if(dataList.isEmpty()){
-            dataList = remoteRepository.retrieveById(id)
-            dataList.forEach {
-                localSave(it, id)
+     fun retrieveById(id: String): Flow<List<T>> {
+
+        return localRepository.getById(id).flatMapConcat {localData: List<T> ->
+            if(localData.isNotEmpty())
+                flowOf(localData)
+            else{
+                remoteRepository.retrieveById(id).map {
+                    localSave(it, id)
+                    it
+                }
             }
+
         }
-        return dataList
     }
 
-    abstract suspend fun localSave(data: T, id: String)
+    abstract suspend fun localSave(dataList: List<T>, id: String)
 }
