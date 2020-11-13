@@ -1,8 +1,8 @@
 package com.companytest.thesports.di
 
-import com.companytest.thesports.repository.BASE_URL
-import com.companytest.thesports.repository.network.RetrofitInterceptor
-import com.companytest.thesports.repository.network.SportService
+import com.companytest.thesports.datasource.network.BASE_URL
+import com.companytest.thesports.datasource.network.RetrofitInterceptor
+import com.companytest.thesports.datasource.network.SportService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,13 +1,15 @@
 package com.companytest.thesports.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.companytest.thesports.domain.Event
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.usecases.RetrieveAllEventsByTeamId
 import com.companytest.thesports.usecases.RetrieveTeam
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class TeamDetailViewModel @ViewModelInject constructor(private val retrieveTeam: RetrieveTeam, private val retrieveAllEventsByTeamId: RetrieveAllEventsByTeamId) : ViewModel() {
@@ -23,20 +25,21 @@ class TeamDetailViewModel @ViewModelInject constructor(private val retrieveTeam:
 
     fun retrieveTeam(idTeam: String){
         viewModelScope.launch {
-            var response: Team? = null
             _loading.value = true
-            response = retrieveTeam.retrieveTeam(idTeam)
-            _loading.value = false
-            _teamLiveData.value = response
+            retrieveTeam.retrieveTeam(idTeam).collect {
+                _teamLiveData.value = it
+                _loading.value = false
+            }
         }
     }
 
     fun retrieveNextEventsByTeamId(teamId: String){
         viewModelScope.launch {
-            var response: List<Event> = arrayListOf()
             _loading.value = true
-            response = retrieveAllEventsByTeamId.retrieveEventsByTeamId(teamId)
-            _eventsLiveData.value = response ?: arrayListOf()
+            retrieveAllEventsByTeamId.retrieveEventsByTeamId(teamId).collect {
+                _eventsLiveData.value = it
+            }
+            _loading.value = false
         }
     }
 

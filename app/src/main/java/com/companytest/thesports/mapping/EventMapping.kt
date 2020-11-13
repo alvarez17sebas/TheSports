@@ -1,7 +1,7 @@
 package com.companytest.thesports.mapping
 
 import com.companytest.thesports.domain.Event
-import com.companytest.thesports.repository.database.entity.EventEntity
+import com.companytest.thesports.datasource.database.entity.EventEntity
 
 class EventMapping {
     companion object {

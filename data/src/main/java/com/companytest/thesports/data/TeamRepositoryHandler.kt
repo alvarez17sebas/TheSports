@@ -1,5 +1,6 @@
-package com.companytest.thesports.data.handler
+package com.companytest.thesports.data
 
+import com.companytest.thesports.data.RepositoryHandler
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.domain.repository.LocalRepository
 import com.companytest.thesports.domain.repository.RemoteRepository
@@ -9,7 +10,10 @@ class TeamRepositoryHandler @Inject constructor(
     localRepository: LocalRepository<Team>,
     remoteRepository: RemoteRepository<Team>
 ) : RepositoryHandler<Team>(localRepository, remoteRepository) {
-    override suspend fun localSave(data: Team, id: String) {
-        localRepository.save(data)
+
+    override suspend fun localSave(dataList: List<Team>, id: String) {
+        dataList.forEach {team: Team ->
+            localRepository.save(team)
+        }
     }
 }
