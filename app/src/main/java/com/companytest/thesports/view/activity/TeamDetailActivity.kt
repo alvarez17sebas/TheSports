@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.companytest.thesports.R
 import com.companytest.thesports.databinding.ActivityTeamDetailBinding
 import com.companytest.thesports.domain.Event
+import com.companytest.thesports.domain.ResultWrapper
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.view.TEAM_ID
 import com.companytest.thesports.view.adapter.EventAdapter
@@ -76,18 +77,46 @@ class TeamDetailActivity : AppCompatActivity() {
     }
 
     private fun executeObservers() {
-        teamDetailViewModel.teamLiveData.observe(this, Observer { team: Team ->
-            supportActionBar?.title = (team.strTeam)
-            binding.tvTeamFoundationYear.text = team.intFormedYear
-            binding.tvDescriptionTeamDetail.text = team.strDescriptionEN
-            loadImage(team.strTeamBadge, binding.ivCoverPhoto)
-            loadImage(team.strTeamJersey ?: "", binding.ivJersey)
+        teamDetailViewModel.teamLiveData.observe(this, Observer { teamWrapper: ResultWrapper<Team> ->
 
-            clickEvents(team)
+            when(teamWrapper) {
+                is ResultWrapper.Loading -> {
+                    binding.clLoadingContainer.visibility = View.VISIBLE
+                }
+
+                is ResultWrapper.Success -> {
+                    binding.clLoadingContainer.visibility = View.GONE
+                    supportActionBar?.title = (teamWrapper.data.strTeam)
+                    binding.tvTeamFoundationYear.text = teamWrapper.data.intFormedYear
+                    binding.tvDescriptionTeamDetail.text = teamWrapper.data.strDescriptionEN
+                    loadImage(teamWrapper.data.strTeamBadge, binding.ivCoverPhoto)
+                    loadImage(teamWrapper.data.strTeamJersey ?: "", binding.ivJersey)
+
+                    clickEvents(teamWrapper.data)
+                }
+
+                is ResultWrapper.Error -> {
+                    binding.clLoadingContainer.visibility = View.GONE
+                    Toast.makeText(this, teamWrapper.message, Toast.LENGTH_LONG).show()
+                }
+            }
         })
 
-        teamDetailViewModel.eventsLiveData.observe(this, Observer { events: List<Event> ->
-            setRecyclerEventData(events)
+        teamDetailViewModel.eventsLiveData.observe(this, Observer { eventsWrapper: ResultWrapper<List<Event>> ->
+
+            when(eventsWrapper){
+                is ResultWrapper.Loading -> {
+
+                }
+                is ResultWrapper.Success -> {
+                    setRecyclerEventData(eventsWrapper.data)
+                }
+
+                is ResultWrapper.Error -> {
+                    Toast.makeText(this, eventsWrapper.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+
         })
 
         teamDetailViewModel.loading.observe(this, Observer { isLoading: Boolean ->

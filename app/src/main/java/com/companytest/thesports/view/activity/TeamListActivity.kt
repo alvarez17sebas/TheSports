@@ -4,12 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.companytest.thesports.R
 import com.companytest.thesports.databinding.ActivityTeamListBinding
+import com.companytest.thesports.domain.ResultWrapper
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.view.TEAM_ID
 import com.companytest.thesports.view.adapter.TeamAdapter
@@ -29,7 +31,7 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
         setupRecyclerView()
 
 
-        teamListViewModel.retrieveAllTeams(getString(R.string.spanish_league))
+        teamListViewModel.getTeams(getString(R.string.spanish_league))
 
         radioButtonsClick()
         executeObserves()
@@ -53,7 +55,7 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
 
     private fun executeObserves(){
 
-        teamListViewModel.teamsLiveData
+        /*teamListViewModel.teamsLiveData
             .observe(this, Observer {teams: List<Team> ->
                 setRecycleData(teams)
             })
@@ -61,6 +63,25 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
         teamListViewModel.loading.observe(this, Observer { isLoading: Boolean ->
             if(isLoading) binding.clLoadingContainer.visibility = View.VISIBLE else binding.clLoadingContainer.visibility = View.GONE
 
+        })*/
+
+        teamListViewModel.lvTeams.observe(this, Observer { resultWrapper: ResultWrapper<List<Team>> ->
+            when(resultWrapper) {
+                is ResultWrapper.Loading -> {
+                    binding.clLoadingContainer.visibility = View.VISIBLE
+                }
+                is ResultWrapper.Success -> {
+                    binding.clLoadingContainer.visibility = View.GONE
+                    setRecycleData(resultWrapper.data)
+                }
+                is ResultWrapper.Error -> {
+                    binding.clLoadingContainer.visibility = View.GONE
+                    Toast.makeText(this, resultWrapper.message, Toast.LENGTH_SHORT).show()
+                }
+                is ResultWrapper.NoLoading -> {
+                    binding.clLoadingContainer.visibility = View.GONE
+                }
+            }
         })
     }
 
@@ -68,17 +89,17 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
         var leagueParameter: String = getString(R.string.spanish_league)
         binding.rbSpanishLeague.setOnClickListener {
             leagueParameter = binding.rbSpanishLeague.text.toString()
-            teamListViewModel.retrieveAllTeams(leagueParameter)
+            teamListViewModel.getTeams(leagueParameter)
         }
 
         binding.rbGermanLeague.setOnClickListener {
             leagueParameter = binding.rbGermanLeague.text.toString()
-            teamListViewModel.retrieveAllTeams(leagueParameter)
+            teamListViewModel.getTeams(leagueParameter)
         }
 
         binding.rbNbaLeague.setOnClickListener {
             leagueParameter = binding.rbNbaLeague.text.toString()
-            teamListViewModel.retrieveAllTeams(leagueParameter)
+            teamListViewModel.getTeams(leagueParameter)
         }
 
     }
