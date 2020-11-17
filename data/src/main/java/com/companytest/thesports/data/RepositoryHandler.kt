@@ -1,7 +1,6 @@
 package com.companytest.thesports.data
 
 import com.companytest.thesports.domain.ResultWrapper
-import com.companytest.thesports.domain.Team
 import com.companytest.thesports.domain.repository.LocalRepository
 import com.companytest.thesports.domain.repository.RemoteRepository
 import kotlinx.coroutines.Dispatchers

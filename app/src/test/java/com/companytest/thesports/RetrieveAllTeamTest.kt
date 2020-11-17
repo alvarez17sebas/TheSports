@@ -45,7 +45,6 @@ class RetrieveAllTeamTest {
                 localRepository,
                 teamRemoteRepository
             )
-
     }
 
     @Test
@@ -78,6 +77,7 @@ class RetrieveAllTeamTest {
             }
         }
     }
+
     @Test
     fun retrieveAllTeamsSuccess_2() {
         //Arrange

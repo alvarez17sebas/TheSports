@@ -78,9 +78,6 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
                     binding.clLoadingContainer.visibility = View.GONE
                     Toast.makeText(this, resultWrapper.message, Toast.LENGTH_SHORT).show()
                 }
-                is ResultWrapper.NoLoading -> {
-                    binding.clLoadingContainer.visibility = View.GONE
-                }
             }
         })
     }
