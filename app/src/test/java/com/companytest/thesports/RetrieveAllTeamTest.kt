@@ -78,7 +78,7 @@ class RetrieveAllTeamTest {
         }
     }
 
-    @Test
+
     fun retrieveAllTeamsSuccess_2() {
         //Arrange
         val retrieveTeamsUseCase: RetrieveAllTeams = RetrieveAllTeams(teamRepositoryHandler)
