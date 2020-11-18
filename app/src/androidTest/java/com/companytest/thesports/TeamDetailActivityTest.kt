@@ -1,17 +1,12 @@
 package com.companytest.thesports
 
 import android.content.Intent
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
+import com.companytest.thesports.pagepattern.Page
+import com.companytest.thesports.pagepattern.TeamDetailPage
 import com.companytest.thesports.view.TEAM_ID
 import com.companytest.thesports.view.activity.TeamDetailActivity
-import com.companytest.thesports.view.adapter.EventAdapter
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,20 +26,13 @@ class TeamDetailActivityTest {
     @Test
     fun eventsRecyclerViewIsDisplayed() {
         startActivity()
-        onView(withId(R.id.rvTeamEvents))
-            .check(matches(isDisplayed()))
+        Page.on<TeamDetailPage>().eventsRecyclerViewIsDisplayed()
     }
 
     @Test
     fun locateFourthEventItem() {
         startActivity()
-        onView(withId(R.id.rvTeamEvents))
-            .perform(
-                RecyclerViewActions.actionOnItemAtPosition<EventAdapter.EventViewHolder>(
-                    4,
-                    ViewActions.click()
-                )
-            )
+        Page.on<TeamDetailPage>().locateEventItem(4)
     }
 
 }

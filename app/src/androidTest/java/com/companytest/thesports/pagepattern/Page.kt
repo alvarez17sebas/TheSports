@@ -1,4 +1,4 @@
-package com.companytest.thesports
+package com.companytest.thesports.pagepattern
 
 import androidx.test.espresso.Espresso
 
