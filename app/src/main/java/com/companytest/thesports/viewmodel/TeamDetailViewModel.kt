@@ -26,39 +26,18 @@ class TeamDetailViewModel @ViewModelInject constructor(private val retrieveTeam:
 
     fun retrieveTeam(idTeam: String){
         viewModelScope.launch {
-            //_loading.value = true
             retrieveTeam.retrieveTeam(idTeam).collect {
                 _teamLiveData.value = it
-               // _loading.value = false
             }
         }
     }
 
     fun retrieveNextEventsByTeamId(teamId: String){
         viewModelScope.launch {
-            //_loading.value = true
             retrieveAllEventsByTeamId.retrieveEventsByTeamId(teamId).collect {
                 _eventsLiveData.value = it
             }
-           // _loading.value = false
         }
     }
 
-    /*fun retrieveTeam(idTeam: String): LiveData<Team>{
-        return retrieveTeam.retrieveTeam(idTeam).onStart {
-            _loading.value = true
-        }.onCompletion {
-            _loading.value = false
-        }.asLiveData()
-    }*/
-
-    /*fun retrieveNextEventsByTeamId(teamId: String): LiveData<List<Event>>{
-
-        return retrieveAllEventsByTeamId.retrieveEventsByTeamId(teamId).onStart {
-            _loading.value = true
-        }.onCompletion {
-            _loading.value = false
-        }.asLiveData()
-
-    }*/
 }

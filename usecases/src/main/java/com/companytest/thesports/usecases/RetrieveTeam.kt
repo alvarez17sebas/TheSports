@@ -15,9 +15,4 @@ class RetrieveTeam @Inject constructor(private val teamRepositoryRepositoryHandl
             result
         }
     }
-    /*fun retrieveTeam(id: String): Flow<Team> {
-        return teamRepository.retrieveById(id).map {
-            it[0]
-        }
-    }*/
 }
