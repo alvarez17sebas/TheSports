@@ -14,9 +14,7 @@ class TeamRepositoryImpl @Inject constructor(val sportService: SportService) :
         return sportService.retrieveAllTeams(leagueParameter).teams
     }
 
-    override fun retrieveById(id: String): Flow<List<Team>> {
-        return flow {
-            emit(sportService.retrieveTeam(id).teams)
-        }.flowOn(Dispatchers.IO)
+    override suspend fun retrieveById(id: String): List<Team> {
+        return sportService.retrieveTeam(id).teams
     }
 }

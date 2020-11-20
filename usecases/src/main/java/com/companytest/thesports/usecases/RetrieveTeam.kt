@@ -10,9 +10,18 @@ import javax.inject.Inject
 class RetrieveTeam @Inject constructor(private val teamRepositoryRepositoryHandler: TeamRepositoryHandler) {
     fun retrieveTeam(id: String): Flow<ResultWrapper<Team>> {
         return teamRepositoryRepositoryHandler.retrieveById(id).map {
-            var list: List<Team> = (it as ResultWrapper.Success).data
-            val result: ResultWrapper<Team> = ResultWrapper.Success(list[0])
-            result
+            var response: ResultWrapper<Team> = when(it) {
+                is ResultWrapper.Loading -> {
+                    it
+                }
+                is ResultWrapper.Success -> {
+                    ResultWrapper.Success(it.data[0])
+                }
+                is ResultWrapper.Error -> {
+                    it
+                }
+            }
+            response
         }
     }
 }

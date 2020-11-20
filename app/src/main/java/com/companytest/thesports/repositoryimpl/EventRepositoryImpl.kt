@@ -18,10 +18,8 @@ class EventRepositoryImpl @Inject constructor(var sportService: SportService) :
         return emptyList()
     }
 
-    override fun retrieveById(id: String): Flow<List<Event>> {
-        return flow<List<Event>> {
-            emit(sportService.retrieveAllEventsByTeamId(id).events)
-        }.flowOn(Dispatchers.IO)
+    override suspend fun retrieveById(id: String): List<Event> {
+        return sportService.retrieveAllEventsByTeamId(id).events
     }
 
 }

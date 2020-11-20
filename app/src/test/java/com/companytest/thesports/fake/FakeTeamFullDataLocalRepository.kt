@@ -22,7 +22,7 @@ class FakeTeamFullDataLocalRepository : LocalRepository<Team> {
     }
 
     override fun getById(id: String): Flow<List<Team>> {
-        return emptyFlow()
+        return flowOf(listOf(Team("3", "Team tree")))
     }
 
     override suspend fun delete(data: Team) {

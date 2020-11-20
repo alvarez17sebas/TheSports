@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface RemoteRepository<T> {
     suspend fun retrieveAll(leagueParameter: String): List<T>
-    fun retrieveById(id: String): Flow<List<T>>
+    suspend fun retrieveById(id: String): List<T>
 }

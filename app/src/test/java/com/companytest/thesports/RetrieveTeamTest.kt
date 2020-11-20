@@ -1,18 +1,15 @@
 package com.companytest.thesports
 
 import com.companytest.thesports.data.TeamRepositoryHandler
+import com.companytest.thesports.domain.ResultWrapper
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.domain.repository.LocalRepository
 import com.companytest.thesports.domain.repository.RemoteRepository
+import com.companytest.thesports.fake.FakeTeamFullDataLocalRepository
+import com.companytest.thesports.fake.FakeTeamFullDataRemoteRepository
 import com.companytest.thesports.usecases.RetrieveTeam
-import io.mockk.MockKAnnotations
-import io.mockk.coEvery
-import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.unmockkAll
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.single
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert
@@ -21,43 +18,39 @@ import org.junit.Test
 
 class RetrieveTeamTest {
 
-    @RelaxedMockK
-    lateinit var remoteTeamRepository: RemoteRepository<Team>
-    @RelaxedMockK
-    lateinit var localTeamRepository: LocalRepository<Team>
-
-    lateinit var teamRepositoryHandler: TeamRepositoryHandler
-
     @Before
     fun setup() {
-        MockKAnnotations.init(this)
-        teamRepositoryHandler =
-            TeamRepositoryHandler(
-                localTeamRepository,
-                remoteTeamRepository
-            )
     }
-
-    //@Test
+    @Test
     fun `retrieveTeam return team object success`() {
         //Arrange
-        val retrieveTeam: RetrieveTeam = RetrieveTeam(teamRepositoryHandler)
+        val localRepository: LocalRepository<Team> = FakeTeamFullDataLocalRepository()
+        val remoteRepository: RemoteRepository<Team> = FakeTeamFullDataRemoteRepository()
+        val repositoryHandler: TeamRepositoryHandler = TeamRepositoryHandler(localRepository, remoteRepository)
+
+        val retrieveTeamUseCase: RetrieveTeam = RetrieveTeam(repositoryHandler)
+        val expectedValue = Team("3", "Team tree")
         val param: String = ""
-        var fakeResponse: Flow<List<Team>> = flowOf(listOf(Team()))
-        val expectedValue: Team = Team()
-        var response: Team? = null
 
         //Act
-        coEvery {
-            teamRepositoryHandler.retrieveById(param)
-        } returns emptyFlow()
-
-        runBlocking {
-            //response = retrieveTeam.retrieveTeam(param).single()
-        }
+        val response = retrieveTeamUseCase.retrieveTeam(param)
 
         //Assert
-        Assert.assertEquals(expectedValue, response)
+        runBlocking {
+            response.collect { resultWrapperResponse: ResultWrapper<Team> ->
+                when (resultWrapperResponse) {
+                    is ResultWrapper.Loading -> {
+                        Assert.assertEquals(ResultWrapper.Loading, resultWrapperResponse)
+                    }
+                    is ResultWrapper.Success -> {
+                        Assert.assertEquals(expectedValue, resultWrapperResponse.data)
+                    }
+                    is ResultWrapper.Error -> {
+                        Assert.assertEquals(ResultWrapper.Error(""), resultWrapperResponse)
+                    }
+                }
+            }
+        }
     }
 
     @After
