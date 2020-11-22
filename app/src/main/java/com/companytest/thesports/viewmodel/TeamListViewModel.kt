@@ -17,7 +17,7 @@ class TeamListViewModel @ViewModelInject constructor(private val retrieveAllTeam
     var lvTeams: LiveData<ResultWrapper<List<Team>>> = _lvTeams
 
     fun getTeams(leagueParameter: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Main) {
             retrieveAllTeams.retrieveTeams(leagueParameter).collect {
                 _lvTeams.value = it
             }

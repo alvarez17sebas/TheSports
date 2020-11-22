@@ -8,8 +8,11 @@ import com.companytest.thesports.domain.repository.RemoteRepository
 import com.companytest.thesports.fake.FakeTeamFullDataLocalRepository
 import com.companytest.thesports.fake.FakeTeamFullDataRemoteRepository
 import com.companytest.thesports.usecases.RetrieveTeam
+import io.mockk.every
+import io.mockk.mockk
 import io.mockk.unmockkAll
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert
@@ -18,17 +21,19 @@ import org.junit.Test
 
 class RetrieveTeamTest {
 
+    private val repositoryHandlerFullData: TeamRepositoryHandler = mockk()
+    private val fullDataFlow = flowOf(ResultWrapper.Success(listOf(Team("3", "Team tree"))))
+
     @Before
     fun setup() {
+        every {
+            repositoryHandlerFullData.retrieveById("")
+        } returns fullDataFlow
     }
     @Test
     fun `retrieveTeam return team object success`() {
         //Arrange
-        val localRepository: LocalRepository<Team> = FakeTeamFullDataLocalRepository()
-        val remoteRepository: RemoteRepository<Team> = FakeTeamFullDataRemoteRepository()
-        val repositoryHandler: TeamRepositoryHandler = TeamRepositoryHandler(localRepository, remoteRepository)
-
-        val retrieveTeamUseCase: RetrieveTeam = RetrieveTeam(repositoryHandler)
+        val retrieveTeamUseCase: RetrieveTeam = RetrieveTeam(repositoryHandlerFullData)
         val expectedValue = Team("3", "Team tree")
         val param: String = ""
 
