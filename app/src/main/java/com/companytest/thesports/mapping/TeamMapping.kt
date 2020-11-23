@@ -31,8 +31,8 @@ class TeamMapping {
                 teamEntity.str_website,
                 teamEntity.str_facebook,
                 teamEntity.str_twitter,
-                teamEntity.str_instagram,
-                teamEntity.str_descriptionEN,
+                teamEntity.str_instagram?:"",
+                teamEntity.str_descriptionEN?:"",
                 teamEntity.str_teamBadge,
                 teamEntity.st_teamJersey,
                 teamEntity.str_youtube

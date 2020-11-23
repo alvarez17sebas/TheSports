@@ -1,6 +1,6 @@
 package com.companytest.thesports
 
-import com.companytest.thesports.data.TeamRepositoryHandler
+import com.companytest.thesports.data.team.TeamRepositoryHandler
 import com.companytest.thesports.domain.ResultWrapper
 import com.companytest.thesports.domain.Team
 import com.companytest.thesports.usecases.RetrieveAllTeams

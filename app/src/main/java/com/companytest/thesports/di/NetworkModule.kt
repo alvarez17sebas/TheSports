@@ -1,6 +1,7 @@
 package com.companytest.thesports.di
 
 import com.companytest.thesports.datasource.network.BASE_URL
+import com.companytest.thesports.datasource.network.LeagueService
 import com.companytest.thesports.datasource.network.RetrofitInterceptor
 import com.companytest.thesports.datasource.network.SportService
 import dagger.Module
@@ -41,6 +42,12 @@ object NetworkModule {
     @Singleton
     fun provideSportService(retrofit: Retrofit): SportService {
         return retrofit.create(SportService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLeagueService(retrofit: Retrofit): LeagueService {
+        return retrofit.create(LeagueService::class.java)
     }
 
 }

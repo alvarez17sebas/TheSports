@@ -6,6 +6,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.companytest.thesports.datasource.database.AppDatabase
 import com.companytest.thesports.datasource.database.dao.EventDao
+import com.companytest.thesports.datasource.database.dao.LeagueDao
 import com.companytest.thesports.datasource.database.dao.TeamDao
 import dagger.Module
 import dagger.Provides
@@ -43,5 +44,10 @@ object DatabaseModule {
     @Provides
     fun provideEventDao(database: AppDatabase): EventDao {
         return database.eventDao()
+    }
+
+    @Provides
+    fun provideLeagueDao(database: AppDatabase): LeagueDao {
+        return database.leagueDao()
     }
 }

@@ -13,8 +13,8 @@ data class TeamEntity(
     val str_website: String = "",
     val str_facebook: String = "",
     val str_twitter: String = "",
-    val str_instagram: String = "",
-    val str_descriptionEN: String = "",
+    val str_instagram: String? = "",
+    val str_descriptionEN: String? = "",
     val str_teamBadge: String = "",
     val st_teamJersey: String? = "",
     val str_youtube: String = ""

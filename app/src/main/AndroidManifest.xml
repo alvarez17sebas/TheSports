@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.companytest.thesports">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".TheSportApplication"
@@ -12,13 +12,17 @@
         android:roundIcon="@mipmap/ic_sportdatabase"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.TeamDetailActivity"
+        <activity android:name=".view.activity.LeagueActivity">
+        </activity>
+        <activity
+            android:name=".view.activity.TeamDetailActivity"
             android:parentActivityName=".view.activity.TeamListActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".view.activity.TeamListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.activity.SplashScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.TeamListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

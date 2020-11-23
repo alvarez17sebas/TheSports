@@ -5,12 +5,13 @@ import com.companytest.thesports.domain.Team
 import com.companytest.thesports.domain.repository.LocalRepository
 import com.companytest.thesports.domain.repository.RemoteRepository
 import com.companytest.thesports.datasource.database.dao.EventDao
+import com.companytest.thesports.datasource.database.dao.LeagueDao
 import com.companytest.thesports.datasource.database.dao.TeamDao
+import com.companytest.thesports.datasource.network.LeagueService
 import com.companytest.thesports.datasource.network.SportService
-import com.companytest.thesports.repositoryimpl.EventLocalDatabaseImpl
-import com.companytest.thesports.repositoryimpl.EventRepositoryImpl
-import com.companytest.thesports.repositoryimpl.TeamLocalDatabaseImpl
-import com.companytest.thesports.repositoryimpl.TeamRepositoryImpl
+import com.companytest.thesports.domain.repository.LeagueRemoteRepository
+import com.companytest.thesports.domain.repository.LocalLeagueRepository
+import com.companytest.thesports.repositoryimpl.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,5 +48,15 @@ object TeamRepositoryModule {
         return EventLocalDatabaseImpl(
             eventDao
         )
+    }
+
+    @Provides
+    fun provideLeagueLocalRepository(leagueDao: LeagueDao): LocalLeagueRepository {
+        return LocalRoomDatabaseLeague(leagueDao)
+    }
+
+    @Provides
+    fun provideLeagueRemoteRepository(leagueService: LeagueService): LeagueRemoteRepository {
+        return RemoteRetrofitLeague(leagueService)
     }
 }

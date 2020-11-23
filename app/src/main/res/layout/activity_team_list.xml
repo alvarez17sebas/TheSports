@@ -7,35 +7,32 @@
     android:background="@color/light_indigo"
     tools:context=".view.activity.TeamListActivity">
 
-    <RadioGroup
-        android:id="@+id/radioGroupLeagueFilter"
+    <LinearLayout
+        android:id="@+id/llContainerLeagueSelected"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/multiplier_25X_dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_vertical"
+        android:weightSum="1">
 
-        <RadioButton
-            android:id="@+id/rbSpanishLeague"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvLeagueNameTeamListActivity"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/spanish_league" />
+            android:layout_weight="0.9"
+            android:text="@string/spanish_league"
+            android:textSize="@dimen/multiplier_8X_sp"/>
 
-        <RadioButton
-            android:id="@+id/rbGermanLeague"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/german_league" />
+            android:layout_weight="0.1"
+            android:src="@android:drawable/ic_media_next"/>
 
-        <RadioButton
-            android:id="@+id/rbNbaLeague"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/nba_league" />
-
-    </RadioGroup>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTeamList"
@@ -44,14 +41,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupLeagueFilter"
+        app:layout_constraintTop_toBottomOf="@+id/llContainerLeagueSelected"
         tools:listitem="@layout/item_team_list" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clLoadingContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/radioGroupLeagueFilter">
+        app:layout_constraintTop_toBottomOf="@id/llContainerLeagueSelected">
 
         <View
             android:id="@+id/view"

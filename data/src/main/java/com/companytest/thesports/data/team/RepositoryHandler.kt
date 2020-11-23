@@ -1,7 +1,6 @@
-package com.companytest.thesports.data
+package com.companytest.thesports.data.team
 
 import com.companytest.thesports.domain.ResultWrapper
-import com.companytest.thesports.domain.Team
 import com.companytest.thesports.domain.repository.LocalRepository
 import com.companytest.thesports.domain.repository.RemoteRepository
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +28,12 @@ abstract class RepositoryHandler<T> constructor(
     }
 
     fun retrieveAll(leagueParameter: String): Flow<ResultWrapper<List<T>>> {
-        return localRepository.getAll(leagueParameter).flatMapLatest { localData: List<T> ->
+        return toFlowRetrieveAll(leagueParameter).map {
+            val response: ResultWrapper<List<T>> = ResultWrapper.Success(it)
+            response
+        }
+
+        /*return localRepository.getAll(leagueParameter).flatMapLatest { localData: List<T> ->
             if (localData.isNotEmpty()) {
                 flowOf(localData)
             } else {
@@ -42,7 +46,7 @@ abstract class RepositoryHandler<T> constructor(
             emit(ResultWrapper.Loading)
         }.catch {
             emit(ResultWrapper.Error("Network error"))
-        }.flowOn(Dispatchers.IO)
+        }.flowOn(Dispatchers.IO)*/
     }
 
     fun retrieveById(id: String): Flow<ResultWrapper<List<T>>> {

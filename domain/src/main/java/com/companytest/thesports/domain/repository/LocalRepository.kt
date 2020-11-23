@@ -3,6 +3,7 @@ package com.companytest.thesports.domain.repository
 import kotlinx.coroutines.flow.Flow
 
 interface LocalRepository<T> {
+
     suspend fun save(data: T)
 
     suspend fun saveAll(dataList: List<T>)

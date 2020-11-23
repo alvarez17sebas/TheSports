@@ -1,5 +1,6 @@
 package com.companytest.thesports.view.activity
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +14,7 @@ import com.companytest.thesports.R
 import com.companytest.thesports.databinding.ActivityTeamListBinding
 import com.companytest.thesports.domain.ResultWrapper
 import com.companytest.thesports.domain.Team
+import com.companytest.thesports.view.LEAGUE_NAME
 import com.companytest.thesports.view.TEAM_ID
 import com.companytest.thesports.view.adapter.TeamAdapter
 import com.companytest.thesports.view.adapter.TeamClickListener
@@ -24,6 +26,7 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
 
     private val teamListViewModel: TeamListViewModel by viewModels()
     private lateinit var binding: ActivityTeamListBinding
+    private val requestCodeLeague = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +36,22 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
 
         teamListViewModel.getTeams(getString(R.string.spanish_league))
 
-        radioButtonsClick()
+        clickLeagueContainer()
         executeObserves()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK){
+            when(requestCode) {
+                requestCodeLeague -> {
+                    //var leagueParameter: String = getString(R.string.spanish_league)
+                    val leagueName = data?.getStringExtra(LEAGUE_NAME)
+                    binding.tvLeagueNameTeamListActivity.text = leagueName
+                    teamListViewModel.getTeams(leagueName!!)
+                }
+            }
+        }
     }
 
     private fun setupDataBinding(){
@@ -54,17 +71,6 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
     }
 
     private fun executeObserves(){
-
-        /*teamListViewModel.teamsLiveData
-            .observe(this, Observer {teams: List<Team> ->
-                setRecycleData(teams)
-            })
-
-        teamListViewModel.loading.observe(this, Observer { isLoading: Boolean ->
-            if(isLoading) binding.clLoadingContainer.visibility = View.VISIBLE else binding.clLoadingContainer.visibility = View.GONE
-
-        })*/
-
         teamListViewModel.lvTeams.observe(this, Observer { resultWrapper: ResultWrapper<List<Team>> ->
             when(resultWrapper) {
                 is ResultWrapper.Loading -> {
@@ -82,9 +88,18 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
         })
     }
 
-    private fun radioButtonsClick(){
-        var leagueParameter: String = getString(R.string.spanish_league)
-        binding.rbSpanishLeague.setOnClickListener {
+    private fun clickLeagueContainer(){
+
+        binding.llContainerLeagueSelected.setOnClickListener {
+            val intent: Intent = Intent(this, LeagueActivity::class.java)
+            startActivityForResult(intent, requestCodeLeague)
+        }
+
+        /*var leagueParameter: String = getString(R.string.spanish_league)
+        binding.llContainerLeagueSelected.setOnClickListener {
+            teamListViewModel.getTeams(binding.tvLeagueNameTeamListActivity.text.toString())
+        }*/
+        /*binding.rbSpanishLeague.setOnClickListener {
             leagueParameter = binding.rbSpanishLeague.text.toString()
             teamListViewModel.getTeams(leagueParameter)
         }
@@ -97,7 +112,7 @@ class TeamListActivity : AppCompatActivity(), TeamClickListener {
         binding.rbNbaLeague.setOnClickListener {
             leagueParameter = binding.rbNbaLeague.text.toString()
             teamListViewModel.getTeams(leagueParameter)
-        }
+        }*/
 
     }
 

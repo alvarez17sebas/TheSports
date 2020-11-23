@@ -1,4 +1,4 @@
-package com.companytest.thesports.data
+package com.companytest.thesports.data.team
 
 import com.companytest.thesports.domain.Event
 import com.companytest.thesports.domain.repository.LocalRepository

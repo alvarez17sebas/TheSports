@@ -1,6 +1,6 @@
 package com.companytest.thesports.usecases
 
-import com.companytest.thesports.data.EventRepositoryHandler
+import com.companytest.thesports.data.team.EventRepositoryHandler
 import com.companytest.thesports.domain.Event
 import com.companytest.thesports.domain.ResultWrapper
 import kotlinx.coroutines.flow.Flow

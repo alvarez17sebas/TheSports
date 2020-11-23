@@ -11,4 +11,5 @@
     <string name="german_league">German Bundesliga</string>
     <string name="nba_league">NBA</string>
     <string name="no_url">The team has not URL assigned</string>
+    <string name="leagues">Leagues</string>
 </resources>
